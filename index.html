@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Personal</title>
+    <!-- Bootstrap CSS (Usado ÚNICAMENTE para el NavBar y el Carrusel) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Nuestro archivo de estilos CSS propio para el resto de la página -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- ==========================================
+         1. NAVBAR (Con Bootstrap)
+         ========================================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Mi Perfil</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavegacion"
+                aria-controls="menuNavegacion" aria-expanded="false" aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuNavegacion">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#carrusel">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pasatiempos">Pasatiempos e Intereses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#horario">Horario (Sheets)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#favoritos">Música y Juegos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#frase">frase</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#footer">Redes</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         2. CARRUSEL AUTOMÁTICO DE 3 FOTOS (Con Bootstrap)
+         ========================================== -->
+    <section id="carrusel" class="seccion-carrusel">
+        <div id="carruselTresFotos" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <!-- Indicadores inferiores para las 3 fotos -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carruselTresFotos" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Foto 1"></button>
+                <button type="button" data-bs-target="#carruselTresFotos" data-bs-slide-to="1"
+                    aria-label="Foto 2"></button>
+                <button type="button" data-bs-target="#carruselTresFotos" data-bs-slide-to="2"
+                    aria-label="Foto 3"></button>
+            </div>
+
+            <!-- Las 3 fotos del carrusel (Cambia el atributo src="" por tus propias fotos) -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMPj_L1mVYVkKip49tSHwVi4DBIsQZjWgfcrEpr_aHnA&s=10"
+                        class="d-block w-100 img-carrusel" alt="Foto 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>Mi Mundo</h2>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKU6Y7RZfy6efY1t1mFFVnC5BmR6msFbdnlD_V6ieTsQ&s=10"
+                        class="d-block w-100 img-carrusel" alt="Foto 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>pasatiempos</h2>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl84LKEyfvn9ktFBhe55hoHl2sNnfKYijzzbIIyJF0sQ&s=10"
+                        class="d-block w-100 img-carrusel" alt="Foto 3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>banda favorita</h2>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flechas de anterior y siguiente -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carruselTresFotos"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carruselTresFotos"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         3. CUERPO PRINCIPAL DE LA PÁGINA
+         ========================================== -->
+    <main class="contenedor-principal">
+
+        <!-- A) PASATIEMPOS (NO PRODUCTIVO) E INTERESES (PRODUCTIVO) -->
+        <section id="pasatiempos" class="seccion-bloque">
+            <h2 class="titulo-seccion">Sobre Mí</h2>
+            <div class="grid-dos-columnas">
+                <!-- Pasatiempos (No Productivo) -->
+                <article class="tarjeta">
+                    <div class="etiqueta-tipo no-productivo">No Productivo</div>
+                    <h3>Pasatiempos</h3>
+                    <p>Actividades que hago en mi tiempo libre para relajarme y divertirme:</p>
+                    <ul class="lista-personalizada">
+                        <li>Jugar videojuegos con amigos los fines de semana.</li>
+                        <li>Ver series, anime o películas de ciencia ficción.</li>
+                        <li>Escuchar música y descubrir nuevas playlists.</li>
+                        <li>Salir a caminar o pasar el rato en redes sociales.</li>
+                    </ul>
+                </article>
+
+                <!-- Intereses (Productivo) -->
+                <article class="tarjeta">
+                    <div class="etiqueta-tipo productivo">Productivo</div>
+                    <h3>Intereses</h3>
+                    <p>Actividades en las que me enfoco para aprender y crecer:</p>
+                    <ul class="lista-personalizada">
+                        <li>Aprender programación y diseño web (HTML, CSS).</li>
+                        <li>Mejorar mis hábitos de estudio y organización.</li>
+                        <li>Practicar deporte o hacer ejercicio regularmente.</li>
+                        <li>Aprender un nuevo idioma o habilidad técnica.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- B) HORARIO (INFALTABLES DIARIOS - SHEETS) -->
+        <section id="horario" class="seccion-bloque">
+            <h2 class="titulo-seccion">Horario (Infaltables Diarios - Sheets)</h2>
+            <p class="descripcion-seccion">Mi rutina diaria organizada en Google Sheets.</p>
+
+            <div class="contenedor-iframe-sheets">
+                <iframe
+                    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQv_Za2WpkiAMMA-pn5YumT0LbBhuPd7JCl9rtfQpuyn095lwY_bxq2asX9krhcntFvoDAKFX39E_Mh/pubhtml?widget=true&amp;headers=false"
+                    width="100%" height="420" frameborder="0"></iframe>
+            </div>
+        </section>
+
+        <!-- C) MÚSICA Y JUEGOS (FAVORITOS - TABLAS) -->
+        <section id="favoritos" class="seccion-bloque">
+            <h2 class="titulo-seccion">Mis Favoritos (Tablas)</h2>
+            <div class="grid-dos-columnas">
+
+                <!-- Tabla de Música Favorita -->
+                <div class="tarjeta">
+                    <h3>🎵 Música Favorita</h3>
+                    <div class="contenedor-tabla">
+                        <table class="tabla-favoritos">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Canción / Álbum</th>
+                                    <th>Artista</th>
+                                    <th>Género</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Reptilia</td>
+                                    <td>The Strokes</td>
+                                    <td>Indie Rock / Post-Punk Revival</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Blade of Immortal Steel</td>
+                                    <td>Twilight Force</td>
+                                    <td>Symphonic Power Metal</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Zero</td>
+                                    <td>Imagine Dragons</td>
+                                    <td>Pop Rock / Indie Pop</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tabla de Juegos Favoritos -->
+                <div class="tarjeta">
+                    <h3>🎮} Juegos Favoritos</h3>
+                    <div class="contenedor-tabla">
+                        <table class="tabla-favoritos">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Videojuego</th>
+                                    <th>Plataforma</th>
+                                    <th>Categoría</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>tekken 8</td>
+                                    <td>PC</td>
+                                    <td>lucha</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Overwatch 2 </td>
+                                    <td>PC</td>
+                                    <td>Hero Shooter</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>ark</td>
+                                    <td>pc</td>
+                                    <td>acción-aventura</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- D) FRASE CARACTERÍSTICA Y GRÁFICO -->
+        <section id="frase" class="seccion-bloque">
+            <h2 class="titulo-seccion">Frase Característica</h2>
+            <div class="grid-dos-columnas">
+                <!-- Frase Característica -->
+                <div class="tarjeta caja-frase">
+                    <h3>Mi Frase Característica</h3>
+                    <blockquote>
+                        "El éxito es la suma de pequeños esfuerzos repetidos día tras día."
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         4. FOOTER CON 3 REDES SOCIALES (O | O | O)
+         ========================================== -->
+    <footer id="footer" class="pie-pagina">
+        <div class="footer-contenedor">
+            <div class="footer-info">
+
+
+            </div>
+
+            <!-- Los 3 círculos divididos tal como en el dibujo: O | O | O -->
+            <div class="redes-sociales">
+                <div class="red-columna">
+                    <a href="https://instagram.com" target="_blank" class="circulo-red" title="Instagram">
+                        IG
+                    </a>
+                    <span>Instagram</span>
+                </div>
+                <div class="red-columna">
+                    <a href="https://tiktok.com" target="_blank" class="circulo-red" title="TikTok">
+                        TK
+                    </a>
+                    <span>TikTok</span>
+                </div>
+                <div class="red-columna">
+                    <a href="https://www.facebook.com/daniel.aliaga.3766" target="_blank" class="circulo-red"
+                        title="facebook">
+                        FB
+                    </a>
+                    <span>facebook</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de Bootstrap (necesario para que el carrusel se mueva solo y funcione el menú) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
