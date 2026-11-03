@@ -5,36 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Página Personal</title>
-    <!-- Bootstrap CSS (Usado ÚNICAMENTE para el NavBar y el Carrusel) -->
+    <!-- Bootstrap CSS (Para el Carrusel y estructura base) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Nuestro archivo de estilos CSS propio para el resto de la página -->
+    <!-- Nuestro archivo de estilos CSS propio -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Nuestro script de manipulación del DOM (4 funciones) -->
+    <script src="script.js" defer></script>
 </head>
 
 <body>
 
     <!-- ==========================================
-         1. NAVBAR (Con Bootstrap)
+         1. NAVBAR CON MENÚ HAMBURGUESA DOM (Función 3) Y MODO OSCURO (Función 1)
          ========================================== -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Mi Perfil</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavegacion"
-                aria-controls="menuNavegacion" aria-expanded="false" aria-label="Abrir menú">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="menuNavegacion">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#carrusel">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pasatiempos">Pasatiempos e Intereses</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#horario">Horario (Sheets)</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#favoritos">Música y Juegos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#frase">frase</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#footer">Redes</a></li>
-                </ul>
+    <header class="navbar-dom sticky-top">
+        <div class="container nav-top-bar">
+            <a class="navbar-brand fw-bold text-white text-decoration-none fs-4" href="#">Mi Perfil</a>
+
+            <div class="acciones-header">
+                <!-- FUNCIÓN 1: Botón Modo Oscuro / Claro -->
+                <button id="themeBtn" class="btn-toggle" type="button">🌙 Cambiar Modo</button>
+
+                <!-- FUNCIÓN 3: Botón Menú Hamburguesa controlado por el DOM -->
+                <button id="burguerBtn" class="btn-burguer" type="button">☰ Menú Navegación</button>
             </div>
         </div>
-    </nav>
+
+        <!-- Menú desplegable controlado con classList.toggle('show') -->
+        <nav id="navMenu" class="nav-menu container">
+            <a href="#carrusel">Inicio</a>
+            <a href="#pasatiempos">Pasatiempos e Intereses</a>
+            <a href="#horario">Horario (Sheets)</a>
+            <a href="#juegos">Juegos Favoritos</a>
+            <a href="#musica">Música Favorita</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#frase">Frase</a>
+            <a href="#contratacion">Contratación</a>
+            <a href="#footer">Redes</a>
+        </nav>
+    </header>
 
     <!-- ==========================================
          2. CARRUSEL AUTOMÁTICO DE 3 FOTOS (Con Bootstrap)
@@ -51,7 +60,7 @@
                     aria-label="Foto 3"></button>
             </div>
 
-            <!-- Las 3 fotos del carrusel (Cambia el atributo src="" por tus propias fotos) -->
+            <!-- Las 3 fotos del carrusel -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMPj_L1mVYVkKip49tSHwVi4DBIsQZjWgfcrEpr_aHnA&s=10"
@@ -64,15 +73,14 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKU6Y7RZfy6efY1t1mFFVnC5BmR6msFbdnlD_V6ieTsQ&s=10"
                         class="d-block w-100 img-carrusel" alt="Foto 2">
                     <div class="carousel-caption d-none d-md-block">
-                        <h2>pasatiempos</h2>
+                        <h2>Pasatiempos</h2>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl84LKEyfvn9ktFBhe55hoHl2sNnfKYijzzbIIyJF0sQ&s=10"
                         class="d-block w-100 img-carrusel" alt="Foto 3">
                     <div class="carousel-caption d-none d-md-block">
-                        <h2>banda favorita</h2>
-
+                        <h2>Banda Favorita</h2>
                     </div>
                 </div>
             </div>
@@ -119,7 +127,7 @@
                     <h3>Intereses</h3>
                     <p>Actividades en las que me enfoco para aprender y crecer:</p>
                     <ul class="lista-personalizada">
-                        <li>Aprender programación y diseño web (HTML, CSS).</li>
+                        <li>Aprender programación y diseño web (HTML, CSS, JavaScript).</li>
                         <li>Mejorar mis hábitos de estudio y organización.</li>
                         <li>Practicar deporte o hacer ejercicio regularmente.</li>
                         <li>Aprender un nuevo idioma o habilidad técnica.</li>
@@ -140,99 +148,602 @@
             </div>
         </section>
 
-        <!-- C) MÚSICA Y JUEGOS (FAVORITOS - TABLAS) -->
-        <section id="favoritos" class="seccion-bloque">
-            <h2 class="titulo-seccion">Mis Favoritos (Tablas)</h2>
-            <div class="grid-dos-columnas">
+        <!-- C.1) APARTADO DE JUEGOS FAVORITOS (2 DESPLEGABLES CON EL DOM: GÉNERO -> JUEGO -> LOGROS E HISTORIA) -->
+        <section id="juegos" class="seccion-bloque">
+            <h2 class="titulo-seccion">Juegos Favoritos (Por Géneros y Logros con DOM)</h2>
+            <p class="descripcion-seccion">
+                <strong>Desplegable 1 (Por Género):</strong> Haz clic en un género para desplegar los videojuegos que juego en esa categoría.<br>
+                <strong>Desplegable 2 (Logros e Información):</strong> Haz clic sobre cualquier videojuego para desplegar mis <strong>logros alcanzados, rango y detalles</strong>.
+            </p>
 
-                <!-- Tabla de Música Favorita -->
-                <div class="tarjeta">
-                    <h3>🎵 Música Favorita</h3>
-                    <div class="contenedor-tabla">
-                        <table class="tabla-favoritos">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Canción / Álbum</th>
-                                    <th>Artista</th>
-                                    <th>Género</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Reptilia</td>
-                                    <td>The Strokes</td>
-                                    <td>Indie Rock / Post-Punk Revival</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Blade of Immortal Steel</td>
-                                    <td>Twilight Force</td>
-                                    <td>Symphonic Power Metal</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Zero</td>
-                                    <td>Imagine Dragons</td>
-                                    <td>Pop Rock / Indie Pop</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <!-- DESPLEGABLE 1: Botones de Géneros de Videojuegos -->
+            <div class="botones-filtro" id="botonesJuegos">
+                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'lucha', this)">Lucha & Artes Marciales (2)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'shooter', this)">Shooters & Battle Royale (3)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'mundo-abierto', this)">Mundo Abierto, RPG & Supervivencia (4)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'todos', this)">Ver Todos (9)</button>
+            </div>
+
+            <p id="aviso-juegos" class="aviso-desplegable">Selecciona un género arriba para desplegar los videojuegos.</p>
+
+            <!-- DESPLEGABLE 2: Tarjetas de Videojuegos (Ocultas al inicio, se despliegan por JS al elegir género y al hacer clic en cada juego) -->
+            <div class="grid-tarjetas-filtro contenedor-colapsado" id="lista-juegos">
+
+                <!-- ================= LUCHA & ARTES MARCIALES ================= -->
+                <div class="card-filtro card card-interactiva" data-categoria="lucha" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Lucha 3D Competitiva</span>
+                        <span class="icono-desplegar">▼ Ver mis logros</span>
+                    </div>
+                    <h4>Tekken 8</h4>
+                    <p class="sub-info"><strong>Tiempo de juego:</strong> +500 Horas | <strong>Rango Máximo:</strong> God of Destruction II</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Acumulé más de <strong>500 horas de juego</strong> dedicadas al competitivo y alcancé el rango <strong>God of Destruction II</strong>, uno de los rangos más altos y exclusivos a nivel mundial. Dominé la ejecución de combos óptimos, el sistema agresivo <em>Heat</em>, castigos por <em>frame data</em> y lectura de rivales en partidas clasificatorias de máxima exigencia.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Octava entrega de la saga de Bandai Namco en Unreal Engine 5 que enfrenta a Jin Kazama y Kazuya Mishima en el clímax de la saga Mishima.</p>
                     </div>
                 </div>
 
-                <!-- Tabla de Juegos Favoritos -->
-                <div class="tarjeta">
-                    <h3>🎮} Juegos Favoritos</h3>
-                    <div class="contenedor-tabla">
-                        <table class="tabla-favoritos">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Videojuego</th>
-                                    <th>Plataforma</th>
-                                    <th>Categoría</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>tekken 8</td>
-                                    <td>PC</td>
-                                    <td>lucha</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Overwatch 2 </td>
-                                    <td>PC</td>
-                                    <td>Hero Shooter</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>ark</td>
-                                    <td>pc</td>
-                                    <td>acción-aventura</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="card-filtro card card-interactiva" data-categoria="lucha" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Artes Marciales / Beat 'em up</span>
+                        <span class="icono-desplegar">▼ Ver mis logros</span>
+                    </div>
+                    <h4>Sifu</h4>
+                    <p class="sub-info"><strong>Récord:</strong> Completado con 20 años (Sin perder vidas) | <strong>Final:</strong> Final Secreto (Wude)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé el juego completando toda la historia terminando con exactamente <strong>20 años de edad sin perder una sola vida (Deathless Run)</strong> en toda la partida. Además, conseguí sacar el <strong>Final Secreto y Verdadero (Wude)</strong>, que es el reto más difícil del juego porque exige romper la barra de estructura de cada uno de los 5 jefes dos veces consecutivas para <strong>perdonarles la vida</strong> sin matarlos, requiriendo precisión absoluta en esquivas y parries.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Título de Kung-Fu Pak Mei donde cada muerte te envejece mediante un talismán mágico mientras buscas justicia contra los cinco asesinos de tu maestro.</p>
+                    </div>
+                </div>
+
+                <!-- ================= SHOOTERS & BATTLE ROYALE ================= -->
+                <div class="card-filtro card card-interactiva" data-categoria="shooter" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Battle Royale / Hero Shooter</span>
+                        <span class="icono-desplegar">▼ Ver mis logros</span>
+                    </div>
+                    <h4>Apex Legends</h4>
+                    <p class="sub-info"><strong>Rango:</strong> 4x Diamante Consecutivo | <strong>Main:</strong> Pathfinder</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Llegué al rango <strong>Diamante en 4 ocasiones consecutivas</strong> jugando principalmente con <strong>Pathfinder</strong>. Dominé las mecánicas avanzadas del gancho (<em>Grappling Hook slingshots</em>), creación de rotaciones estratégicas con tirolina para el escuadrón y toma de altura en <em>lobbies</em> clasificatorios de alto nivel.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Battle Royale frenético por escuadrones de Respawn Entertainment ambientado en el universo de <em>Titanfall</em>.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="shooter" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Hero Shooter Táctico 5v5</span>
+                        <span class="icono-desplegar">▼ Ver mis logros</span>
+                    </div>
+                    <h4>Overwatch 2</h4>
+                    <p class="sub-info"><strong>Recompensas:</strong> Drives y Banners de Temporada conseguidos</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Conseguí completar los <strong>Drives de Temporada (Competitive Drives)</strong> y desbloquear los <strong>Banners / Firmas de Temporada</strong> exclusivos del modo competitivo, logrando rachas de victorias sostenidas en partidas clasificatorias por roles bajo presión.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Shooter competitivo por equipos 5v5 de Blizzard donde la sinergia de habilidades definitivas y el control de objetivos definen cada partida.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="shooter" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">FPS Bélico Histórico</span>
+                        <span class="icono-desplegar">▼ Ver mis logros</span>
+                    </div>
+                    <h4>Battlefield 1</h4>
+                    <p class="sub-info"><strong>Estado:</strong> Campaña e Historias de Guerra completadas</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé el juego completo superando todas las <strong>Historias de Guerra</strong> en los distintos frentes de la Primera Guerra Mundial: desde los combates de tanques en Francia y batallas aéreas sobre los Alpes hasta el desierto de Arabia y Galípoli, dominando infantería y vehículos.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Aclamado shooter en primera persona de DICE ambientado en la Gran Guerra con escenarios destructibles y gran realismo histórico.</p>
+                    </div>
+                </div>
+
+                <!-- ================= MUNDO ABIERTO, RPG & SUPERVIVENCIA ================= -->
+                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Supervivencia / Mundo Abierto</span>
+                        <span class="icono-desplegar">▼ Ver mis logros</span>
+                    </div>
+                    <h4>ARK: Survival Evolved</h4>
+                    <p class="sub-info"><strong>Tiempo de juego:</strong> +200 Horas | <strong>Dificultad:</strong> Máxima Dificultad Completada</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Con más de <strong>200 horas de juego</strong>, logré pasarme ARK en la <strong>dificultad más alta</strong>. Sobreviví al entorno más hostil, domestiqué y crié criaturas de estadísticas perfectas, fabriqué equipamiento <em>Tek</em> y derroté a los jefes de los obeliscos en máxima dificultad.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Juego de supervivencia extrema donde debes prosperar en una misteriosa reserva llena de dinosaurios y criaturas prehistóricas.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">RPG de Acción / Mundo Abierto</span>
+                        <span class="icono-desplegar">▼ Ver mis logros</span>
+                    </div>
+                    <h4>Assassin's Creed Valhalla</h4>
+                    <p class="sub-info"><strong>Estado:</strong> Completado en la Dificultad Más Alta (Pesadilla / Drengr)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé la extensa campaña de <strong>Assassin's Creed Valhalla en la dificultad más alta</strong>, conquistando todos los territorios de Inglaterra y Noruega con Eivor, derrotando a los Zelotes de la Orden de los Antiguos, bestias míticas y asedios de fortalezas sin margen de error.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Épica aventura vikinga del siglo IX donde lideras al Clan del Cuervo para forjar un nuevo hogar en tierras anglosajonas.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">RPG de Acción / Mundo Abierto</span>
+                        <span class="icono-desplegar">▼ Ver mis logros</span>
+                    </div>
+                    <h4>Assassin's Creed Origins</h4>
+                    <p class="sub-info"><strong>Estado:</strong> Completado en la Dificultad Más Alta (Pesadilla)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Al igual que Valhalla, me pasé <strong>Assassin's Creed Origins en la dificultad más alta</strong>. Superé todos los jefes, Phylakes (cazarrecompensas), arenas de gladiadores y elefantes de guerra en el Antiguo Egipto donde cualquier golpe enemigo es letal.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Narra la historia de Bayek de Siwa y Aya en el Egipto ptolemaico y el nacimiento de la Hermandad de los Asesinos.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Acción-Aventura / Mundo Abierto</span>
+                        <span class="icono-desplegar">▼ Ver mis logros</span>
+                    </div>
+                    <h4>Grand Theft Auto V (GTA V)</h4>
+                    <p class="sub-info"><strong>Estado:</strong> Historia Principal Completada</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé toda la campaña principal de <strong>GTA V</strong> de principio a fin, planificando y ejecutando con éxito todos los grandes golpes (<em>Heists</em>) al banco, joyería y el Gran Golpe al Union Depository alternando entre Michael, Franklin y Trevor.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Obra maestra de mundo abierto de Rockstar Games ambientada en la vibrante ciudad de Los Santos y el condado de Blaine.</p>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- D) FRASE CARACTERÍSTICA Y GRÁFICO -->
+        <!-- C.2) APARTADO DE MÚSICA FAVORITA (2 NIVELES INTERACTIVOS CON EL DOM: GÉNERO -> CANCIÓN -> HISTORIA) -->
+        <section id="musica" class="seccion-bloque">
+            <h2 class="titulo-seccion">Música Favorita (Por Géneros e Historia con DOM)</h2>
+            <p class="descripcion-seccion">
+                <strong>Paso 1:</strong> Elige un género musical para ver las canciones que me gustan de ese estilo.<br>
+                <strong>Paso 2:</strong> Haz clic sobre cualquier canción para desplegar su <strong>historia e información completa</strong>.
+            </p>
+
+            <!-- NIVEL 1: Botones de Géneros Musicales (Filtrado DOM con dataset.categoria) -->
+            <div class="botones-filtro" id="botonesMusica">
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'indie', this)">Indie Rock & Psicodélico (6)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'punk-emo', this)">Emo, Pop Punk & Punk Rock (5)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'metal', this)">Heavy, Power Metal & Core (5)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'prog-jrock', this)">Rock Progresivo & J-Rock (3)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'pop-folk', this)">Pop, Funk & Indie Latino (3)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'todos', this)">Ver Todas (22)</button>
+            </div>
+
+            <p id="aviso-musica" class="aviso-desplegable">Selecciona un género musical arriba para desplegar las canciones.</p>
+
+            <!-- NIVEL 2: Catálogo de 22 Canciones (Se despliega por JS al apretar un género, y cada canción despliega su historia al hacerle clic) -->
+            <div class="grid-tarjetas-filtro contenedor-colapsado" id="lista-musica">
+
+                <!-- ================= INDIE ROCK & PSICODÉLICO ================= -->
+                <div class="card-filtro card card-interactiva" data-categoria="indie" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Indie Rock / Garage Rock Revival</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Reptilia — The Strokes</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Room on Fire (2003)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Lanzada como el segundo sencillo de <em>Room on Fire</em>, fue compuesta por Julian Casablancas en Nueva York. Su icónico riff de guitarra entrelazado entre Nick Valensi y Albert Hammond Jr. retrata la tensión de una relación nocturna intensa donde ninguno de los dos quiere ceder. Se convirtió en una de las canciones más famosas de la historia del Indie Rock y de videojuegos como <em>Guitar Hero III</em>.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="indie" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Indie Rock / New Wave</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Machu Picchu — The Strokes</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Angles (2011)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Abre el cuarto álbum de la banda (<em>Angles</em>), marcando el regreso de The Strokes tras cinco años de pausa. Combina ritmos bailables de reggae/new wave con guitarras afiladas, mientras su letra utiliza la ciudadela inca de Machu Picchu como metáfora de subir a la cima del mundo moderno y el desgaste de la fama.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="indie" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Indie Rock / Garage Rock</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Someday — The Strokes</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Is This It (2001)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Uno de los himnos definitivos de principios de los 2000. Julian Casablancas escribió una canción llena de nostalgia anticipada sobre extrañar los "buenos viejos tiempos" de juventud con amigos incluso mientras todavía los estaban viviendo. Su videoclip incluye cameos de bandas como Slash y Guided by Voices.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="indie" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Indie Rock / Post-Punk Revival</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Take Me Out — Franz Ferdinand</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Franz Ferdinand (2004)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> La banda escocesa revolucionó el rock bailable con esta canción que cambia drásticamente de tempo a mitad del primer minuto. Usa un duelo de francotiradores (inspirado también en el asesinato del Archiduque Francisco Fernando) como metáfora de la tensión romántica entre dos personas en una fiesta.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="indie" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Indie Rock / Lo-Fi Surf</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Looking Out for You — Joy Again</h4>
+                    <p class="sub-info"><strong>Sencillo:</strong> Looking Out for You (2015)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Grabada por los jóvenes músicos de Filadelfia Arthur Shea y Sachi DiSerafino cuando apenas eran adolescentes. Con su banjo/guitarra acelerada y su tono desenfadado, confiesa los nervios de estar enamorado de alguien en secreto mientras intenta cuidarla desde lejos. Años después se volvió un fenómeno mundial.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="indie" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Indie Psicodélico / Neo-Psychedelia</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Loser — Tame Impala</h4>
+                    <p class="sub-info"><strong>Artista:</strong> Kevin Parker (Tame Impala)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> El proyecto solista del australiano Kevin Parker (quien graba todos los instrumentos por sí mismo) explora en sus temas la sensación de sentirse un "perdedor" o un extraño frente al desamor, el paso del tiempo y la inseguridad personal, envuelto en bajos hipnóticos, sintetizadores retro y psicodelia moderna.</p>
+                    </div>
+                </div>
+
+                <!-- ================= EMO, POP PUNK & PUNK ROCK ================= -->
+                <div class="card-filtro card card-interactiva" data-categoria="punk-emo" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Alternative Rock / Emo Rock</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>I Don't Love You — My Chemical Romance</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> The Black Parade (2006)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Dentro de la ópera rock <em>The Black Parade</em>, representa el momento doloroso en el que "El Paciente" se despide de su pareja al darse cuenta de que el amor se ha roto. Su videoclip en blanco y negro fue dirigido por Marc Webb y muestra la carga emocional de decir adiós con honestidad.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="punk-emo" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Post-Hardcore / Emo Rock</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Famous Last Words — My Chemical Romance</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> The Black Parade (2006)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Es el clímax de <em>The Black Parade</em>. Gerard Way la escribió para salvar a su hermano Mikey Way de una profunda depresión mientras grababan en la supuesta mansión embrujada "The Paramour". Su coro (<em>"I am not afraid to keep on living, I am not afraid to walk this world alone"</em>) es un himno de supervivencia. Durante la filmación del video, el baterista Bob Bryar sufrió quemaduras reales y Gerard se rompió los ligamentos del pie.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="punk-emo" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Alternative Rock / Emo Rock</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Sleep — My Chemical Romance</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> The Black Parade (2006)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Comienza con grabaciones reales en cinta que hizo Gerard Way hablando dormido sobre los terrores nocturnos y parálisis del sueño que sufría en la mansión Paramour. La canción crece desde un piano melancólico hasta un muro de guitarras devastador mientras grita <em>"Just sleep!"</em>.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="punk-emo" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Punk Rock / Rock Ópera</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Jesus of Suburbia — Green Day</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> American Idiot (2004)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Una obra maestra de más de 9 minutos dividida en 5 actos (<em>Jesus of Suburbia, City of the Damned, I Don't Care, Dearly Beloved</em> y <em>Tales of Another Broken Home</em>). Cuenta la historia de "Jimmy", un joven desencantado que huye de su pequeño pueblo lleno de hipocresía hacia la gran ciudad buscando darle sentido a su vida.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="punk-emo" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Pop Punk</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>The Rock Show — blink-182</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Take Off Your Pants and Jacket (2001)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Cuando el mánager de la banda les dijo que al álbum le faltaba un sencillo veraniego pegadizo, Mark Hoppus escribió <em>The Rock Show</em> en solo 10 minutos sobre enamorarse de una chica en un concierto punk. Con el presupuesto que la disquera les dio para el videoclip, salieron a la calle a regalar dinero en efectivo, destruir un auto y soltar palomas.</p>
+                    </div>
+                </div>
+
+                <!-- ================= HEAVY, POWER METAL & CORE ================= -->
+                <div class="card-filtro card card-interactiva" data-categoria="metal" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Heavy Metal / Hard Rock</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Nightmare — Avenged Sevenfold</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Nightmare (2010)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Es la canción principal del quinto álbum de A7X, marcada por el fallecimiento de su legendario baterista Jimmy "The Rev" Sullivan en diciembre de 2009, quien dejó grabadas las maquetas de batería antes de morir. Mike Portnoy (Dream Theater) grabó la batería final en su honor, convirtiéndola en uno de los temas más oscuros y potentes del metal moderno.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="metal" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Heavy Metal / Hard Rock</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Bat Country — Avenged Sevenfold</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> City of Evil (2005)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Inspirada en la novela y película <em>Fear and Loathing in Las Vegas</em> (Pánico y locura en Las Vegas) del periodista Hunter S. Thompson. Su frase inicial (<em>"He who makes a beast out of himself gets rid of the pain of being a man"</em>) y el duelo de solos gemelos entre Synyster Gates y Zacky Vengeance catapultaron a la banda al estrellato mundial.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="metal" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Symphonic Power Metal</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Dawn of Victory (Álbum Completo) — Rhapsody</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Dawn of Victory (2000)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Tercer capítulo de las <em>Crónicas de Algalord (Emerald Sword Saga)</em> creado por Luca Turilli y Alex Staropoli con la voz épica de Fabio Lione. Combina coros orquestales, música barroca y doble bombo a toda velocidad para narrar la batalla del Guerrero de Hielo contra el señor oscuro Akron por las tierras encantadas.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="metal" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Heavy Metal / Power Metal Neoclásico</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>La Leyenda del Hada y el Mago — Rata Blanca</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Magos, Espadas y Rosas (1990)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> El himno más grande del Heavy Metal en español. Compuesta por el guitarrista argentino Walter Giardino y cantada por Adrián Barilari, narra la historia de un mago solitario en un bosque encantado que se enamora de un hada y lucha contra el mal cuando ella cae en un sueño profundo, coronada por uno de los solos neoclásicos más famosos del continente.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="metal" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Post-Hardcore / Metalcore Moderno</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Joseph — Falling In Reverse</h4>
+                    <p class="sub-info"><strong>Artista:</strong> Falling In Reverse (Ronnie Radke)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> La banda liderada por Ronnie Radke ( cuyo nombre completo es Ronald Joseph Radke ) revolucionó la escena mezclando Post-Hardcore, Metalcore, Rap y arreglos cinematográficos. Sus canciones relatan sus batallas internas contra sus demonios personales, la crítica social y su redención en la música.</p>
+                    </div>
+                </div>
+
+                <!-- ================= ROCK PROGRESIVO & J-ROCK ================= -->
+                <div class="card-filtro card card-interactiva" data-categoria="prog-jrock" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Space Rock / Progressive Rock</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Knights of Cydonia — Muse</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Black Holes and Revelations (2006)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Cierra el álbum <em>Black Holes and Revelations</em> fusionando el sonido de los westerns espagueti de Ennio Morricone (y el éxito de los años 60 <em>Telstar</em>, grabado por el padre de Matt Bellamy) con rock espacial futurista. "Cydonia" es una región real del planeta Marte, y su mensaje llama a levantarse y luchar por nuestros derechos (<em>"No one's gonna take me alive!"</em>).</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="prog-jrock" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Hard Rock Alternativo / Progresivo</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Reapers — Muse</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Drones (2015)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Toma su nombre de los drones militares "MQ-9 Reaper". Con un intro en tapping de guitarra de Matt Bellamy e influencias de Rage Against the Machine y AC/DC, narra la angustia de la guerra moderna donde la muerte cae desde el cielo controlada a distancia tras una pantalla sin empatía humana.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="prog-jrock" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">J-Rock / Alternative Mixture Rock</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Aizo — King Gnu</h4>
+                    <p class="sub-info"><strong>Artista:</strong> King Gnu (Japón)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> King Gnu, liderada por Daiki Tsuneta y la voz de Satoru Iguchi, es una de las bandas japonesas más innovadoras de la actualidad. Su estilo "Tokyo New Mixture Style" combina J-Rock alternativo, funk oscuro, cuerdas dramáticas y falsetes intensos, explorando la dualidad entre el amor y el odio (<em>Alegría y Tormento / Aizou</em>).</p>
+                    </div>
+                </div>
+
+                <!-- ================= POP, FUNK & INDIE LATINO ================= -->
+                <div class="card-filtro card card-interactiva" data-categoria="pop-folk" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Pop / Funk / Soul</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Fun, Fun, Fun — Pharrell Williams</h4>
+                    <p class="sub-info"><strong>Banda Sonora:</strong> Despicable Me (Mi Villano Favorito, 2010)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Compuesta e interpretada por Pharrell Williams para la primera película de <em>Mi Villano Favorito</em> (antes de su megaéxito <em>Happy</em> en la secuela). Combina un ritmo retro de funk y soul de los años 60 con una letra que contrasta el carácter gruñón de Gru frente a un día soleado lleno de diversión.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="pop-folk" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Pop Rock / Indie Pop</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Zero — Imagine Dragons</h4>
+                    <p class="sub-info"><strong>Álbum:</strong> Origins / Wifi Ralph (2018)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> Creada para los créditos de <em>Ralph Breaks the Internet</em>. Aunque su música tiene un ritmo alegre y electrónico, Dan Reynolds explicó que la letra habla sobre la lucha contra el vacío emocional y sentirse como un "cero" en medio de la era digital, reflejando la búsqueda de autoaceptación de Ralph.</p>
+                    </div>
+                </div>
+
+                <div class="card-filtro card card-interactiva" data-categoria="pop-folk" onclick="toggleHistoria(this)">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Indie Folk / Pop Alternativo Latino</span>
+                        <span class="icono-desplegar">▼ Ver historia</span>
+                    </div>
+                    <h4>Doma — Jósean Log</h4>
+                    <p class="sub-info"><strong>Artista:</strong> Jósean Log (México)</p>
+                    <div class="historia-desplegable">
+                        <hr>
+                        <p><strong>Historia y Significado:</strong> El cantautor mexicano Jósean Log destaca por sus melodías cálidas con ukelele, percusiones orgánicas y letras honestas. La canción habla sobre la libertad de ser uno mismo en el amor sin intentar "domar" ni cambiar la esencia de la otra persona.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- C.3) APARTADO DE PROYECTOS REALIZADOS (C#, ASP.NET y SQL SERVER EXPRESS) -->
+        <section id="proyectos" class="seccion-bloque">
+            <h2 class="titulo-seccion">Mis Proyectos de Software</h2>
+            <p class="descripcion-seccion">Proyectos desarrollados en <strong>C#</strong> con tecnología <strong>ASP.NET</strong> y arquitectura conectada a base de datos <strong>SQL Server Express</strong>:</p>
+
+            <div class="grid-tarjetas-filtro" id="lista-proyectos">
+                <!-- 1. BancoBNB -->
+                <div class="card-filtro card">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">FinTech • Banca y Finanzas</span>
+                    </div>
+                    <h4>BancoBNB</h4>
+                    <p class="sub-info"><strong>Stack:</strong> C# • ASP.NET • SQL Server Express</p>
+                    <p>Sistema bancario transaccional enfocado en la gestión de cuentas de ahorro y cuentas corrientes, transferencias entre usuarios, registro de depósitos, retiros y auditoría de transacciones financieras en tiempo real con alta integridad de datos.</p>
+                </div>
+
+                <!-- 2. GestionMedica -->
+                <div class="card-filtro card">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Salud • Gestión Hospitalaria</span>
+                    </div>
+                    <h4>GestionMedica</h4>
+                    <p class="sub-info"><strong>Stack:</strong> C# • ASP.NET • SQL Server Express</p>
+                    <p>Plataforma para centros de salud que automatiza el agendamiento de citas médicas, registro de pacientes, expedientes e historial clínico digital, control de especialidades, asignación de médicos y disponibilidad de consultorios.</p>
+                </div>
+
+                <!-- 3. InscripcionesUniversidad -->
+                <div class="card-filtro card">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">Educación • Gestión Académica</span>
+                    </div>
+                    <h4>InscripcionesUniversidad</h4>
+                    <p class="sub-info"><strong>Stack:</strong> C# • ASP.NET • SQL Server Express</p>
+                    <p>Sistema integral de matrícula universitaria que gestiona la oferta de asignaturas por semestre, control de cupos en aulas, inscripción de materias por parte del alumno, asignación docente y registro de calificaciones.</p>
+                </div>
+
+                <!-- 4. ProyectoBusquedaTrabajo -->
+                <div class="card-filtro card">
+                    <div class="card-cabecera">
+                        <span class="badge-cat">RRHH • Bolsa de Empleo</span>
+                    </div>
+                    <h4>ProyectoBusquedaTrabajo</h4>
+                    <p class="sub-info"><strong>Stack:</strong> C# • ASP.NET • SQL Server Express</p>
+                    <p>Portal web de reclutamiento laboral que conecta postulantes con empresas reclutadoras. Permite la publicación de ofertas de empleo por categoría, postulación con currículum vitae (CV) y seguimiento del estado de cada postulación.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- D) FRASE CARACTERÍSTICA -->
         <section id="frase" class="seccion-bloque">
             <h2 class="titulo-seccion">Frase Característica</h2>
             <div class="grid-dos-columnas">
-                <!-- Frase Característica -->
                 <div class="tarjeta caja-frase">
                     <h3>Mi Frase Característica</h3>
                     <blockquote>
                         "El éxito es la suma de pequeños esfuerzos repetidos día tras día."
                     </blockquote>
                 </div>
+            </div>
+        </section>
+
+        <!-- E) FORMULARIO DE CONTRATACIÓN CON VALIDACIÓN EN TIEMPO REAL POR CAMPO (Función 4) -->
+        <section id="contratacion" class="seccion-bloque">
+            <h2 class="titulo-seccion">Formulario de Contratación</h2>
+            <p class="descripcion-seccion">
+                ¿Deseas contratar mis servicios o integrarme a tu equipo? Completa los datos de contratación. Cada sector valida en tiempo real lo que falta llenar sin esperar a que presiones el botón:
+            </p>
+
+            <div class="tarjeta form-contratacion-box">
+                <form id="contactForm" novalidate>
+                    <!-- 1. Sector Nombre Completo / Contratante -->
+                    <div class="campo-form">
+                        <label for="nombre">Nombre Completo o Empresa Contratante:</label>
+                        <input type="text" id="nombre" placeholder="Ej. Ing. Carlos Mendoza / Tech Solutions">
+                        <div id="msgNombre" class="campo-msg oculto"></div>
+                    </div>
+
+                    <!-- 2. Sector Fecha de Contratación (Día, Mes, Año) -->
+                    <div class="campo-form">
+                        <label>Fecha de Inicio / Contratación (Día / Mes / Año):</label>
+                        <div class="fecha-grupo">
+                            <input type="number" id="dia" placeholder="Día (1-31)" min="1" max="31">
+                            <input type="number" id="mes" placeholder="Mes (1-12)" min="1" max="12">
+                            <input type="number" id="anio" placeholder="Año (Ej. 2026)" min="1950" max="2030">
+                        </div>
+                        <div id="msgFecha" class="campo-msg oculto"></div>
+                    </div>
+
+                    <!-- 3. Sector Carrera / Área de Contratación -->
+                    <div class="campo-form">
+                        <label for="carrera">Carrera / Puesto o Servicio Requerido:</label>
+                        <input type="text" id="carrera" placeholder="Ej. Ingeniería de Sistemas - Desarrollador Web">
+                        <div id="msgCarrera" class="campo-msg oculto"></div>
+                    </div>
+
+                    <!-- 4. Sector Semestre / Modalidad -->
+                    <div class="campo-form">
+                        <label for="semestre">Semestre Académico / Modalidad de Trabajo:</label>
+                        <select id="semestre">
+                            <option value="">-- Selecciona el semestre / modalidad --</option>
+                            <option value="1er Semestre (Pasantía)">1er Semestre (Pasantía)</option>
+                            <option value="2do Semestre (Pasantía)">2do Semestre (Pasantía)</option>
+                            <option value="3er Semestre (Medio Tiempo)">3er Semestre (Medio Tiempo)</option>
+                            <option value="4to Semestre (Medio Tiempo)">4to Semestre (Medio Tiempo)</option>
+                            <option value="5to Semestre (Por Proyecto)">5to Semestre (Por Proyecto)</option>
+                            <option value="6to Semestre (Por Proyecto)">6to Semestre (Por Proyecto)</option>
+                            <option value="7mo Semestre (Freelance)">7mo Semestre (Freelance)</option>
+                            <option value="8vo Semestre (Freelance)">8vo Semestre (Freelance)</option>
+                            <option value="9no Semestre (Tiempo Completo)">9no Semestre (Tiempo Completo)</option>
+                            <option value="10mo Semestre / Egresado (Tiempo Completo)">10mo Semestre / Egresado (Tiempo Completo)</option>
+                        </select>
+                        <div id="msgSemestre" class="campo-msg oculto"></div>
+                    </div>
+
+                    <!-- 5. Sector Número de Celular -->
+                    <div class="campo-form">
+                        <label for="celular">Número de Celular de Contacto (8 dígitos):</label>
+                        <input type="tel" id="celular" placeholder="Ej. 71234567" maxlength="8">
+                        <div id="msgCelular" class="campo-msg oculto"></div>
+                    </div>
+
+                    <button type="submit" class="btn-contratar">Enviar Solicitud de Contratación</button>
+                </form>
+
+                <!-- Contenedor donde el DOM inyecta el resumen final al enviar -->
+                <div id="alertaBox"></div>
             </div>
         </section>
 
@@ -244,8 +755,8 @@
     <footer id="footer" class="pie-pagina">
         <div class="footer-contenedor">
             <div class="footer-info">
-
-
+                <h4>Mi Perfil Profesional</h4>
+                <p>Diseño Web II • UPDS 2026</p>
             </div>
 
             <!-- Los 3 círculos divididos tal como en el dibujo: O | O | O -->
@@ -267,13 +778,12 @@
                         title="facebook">
                         FB
                     </a>
-                    <span>facebook</span>
+                    <span>Facebook</span>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Script de Bootstrap (necesario para que el carrusel se mueva solo y funcione el menú) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
