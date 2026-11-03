@@ -646,6 +646,28 @@ body.dark-mode .campo-form select.input-ok {
     width: 33.33%;
 }
 
+.telefono-grupo {
+    display: flex;
+    gap: 12px;
+}
+
+.telefono-grupo select {
+    flex: 0 0 46%;
+}
+
+.telefono-grupo input {
+    flex: 1;
+}
+
+@media (max-width: 640px) {
+    .telefono-grupo {
+        flex-direction: column;
+    }
+    .telefono-grupo select {
+        width: 100%;
+    }
+}
+
 .campo-msg {
     display: block;
     font-size: 0.86rem;

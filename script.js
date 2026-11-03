@@ -115,6 +115,7 @@ const msgCarrera = document.getElementById('msgCarrera');
 const semestreInput = document.getElementById('semestre');
 const msgSemestre = document.getElementById('msgSemestre');
 
+const codigoPais = document.getElementById('codigoPais');
 const celularInput = document.getElementById('celular');
 const msgCelular = document.getElementById('msgCelular');
 
@@ -305,13 +306,32 @@ function validarSemestre(mostrarVacio = intentoEnviar) {
     return true;
 }
 
-// 5. Validar Número de Celular de Contacto (solo números, empieza con 6 o 7, 8 dígitos)
+// 5. Validar País y Número de Celular de Contacto (solo números, mínimo 8 dígitos, hasta 15)
 function validarCelular(mostrarVacio = intentoEnviar) {
     const valor = celularInput.value.trim();
+    const pais = codigoPais ? codigoPais.value.trim() : '';
+
+    if (pais === "" && valor === "") {
+        if (mostrarVacio) {
+            actualizarEstado(msgCelular, [codigoPais, celularInput], false, "⚠️ Falta seleccionar el país e ingresar el número de celular.");
+        } else {
+            limpiarEstado(msgCelular, [codigoPais, celularInput]);
+        }
+        return false;
+    }
+
+    if (pais === "") {
+        if (mostrarVacio) {
+            actualizarEstado(msgCelular, [codigoPais], false, "⚠️ Falta seleccionar el país de contacto.");
+        } else {
+            limpiarEstado(msgCelular, [codigoPais]);
+        }
+        return false;
+    }
 
     if (valor === "") {
         if (mostrarVacio) {
-            actualizarEstado(msgCelular, [celularInput], false, "⚠️ Falta ingresar el número de celular de contacto (8 dígitos).");
+            actualizarEstado(msgCelular, [celularInput], false, "⚠️ Falta ingresar el número de celular (mínimo 8 dígitos).");
         } else {
             limpiarEstado(msgCelular, [celularInput]);
         }
@@ -319,21 +339,22 @@ function validarCelular(mostrarVacio = intentoEnviar) {
     }
 
     if (!/^\d+$/.test(valor)) {
-        actualizarEstado(msgCelular, [celularInput], false, "⚠️ El celular solo debe contener números (sin letras ni símbolos).");
+        actualizarEstado(msgCelular, [celularInput], false, "⚠️ El celular solo debe contener números (sin letras, espacios ni símbolos).");
         return false;
     }
 
-    if (!/^[67]/.test(valor)) {
-        actualizarEstado(msgCelular, [celularInput], false, "⚠️ El número de celular en Bolivia debe empezar con 6 o 7.");
+    if (valor.length < 8) {
+        actualizarEstado(msgCelular, [celularInput], false, `⚠️ El celular debe tener al menos 8 dígitos (llevas ${valor.length} de mínimo 8).`);
         return false;
     }
 
-    if (valor.length !== 8) {
-        actualizarEstado(msgCelular, [celularInput], false, `⚠️ El celular debe tener 8 dígitos (actualmente llevas ${valor.length}).`);
+    if (valor.length > 15) {
+        actualizarEstado(msgCelular, [celularInput], false, "⚠️ El número no debe exceder los 15 dígitos internacionales.");
         return false;
     }
 
-    actualizarEstado(msgCelular, [celularInput], true, "✅ Número de celular válido.");
+    const textoPais = codigoPais.options[codigoPais.selectedIndex].text;
+    actualizarEstado(msgCelular, [codigoPais, celularInput], true, `✅ Número válido: ${textoPais} ${valor}`);
     return true;
 }
 
@@ -344,6 +365,9 @@ mesInput.addEventListener('input', () => validarFecha(intentoEnviar));
 anioInput.addEventListener('input', () => validarFecha(intentoEnviar));
 carreraInput.addEventListener('input', () => validarCarrera(intentoEnviar));
 semestreInput.addEventListener('change', () => validarSemestre(intentoEnviar));
+if (codigoPais) {
+    codigoPais.addEventListener('change', () => validarCelular(intentoEnviar));
+}
 celularInput.addEventListener('input', () => validarCelular(intentoEnviar));
 
 // Al presionar el botón Enviar Solicitud de Contratación:
@@ -359,13 +383,14 @@ form.addEventListener('submit', (e) => {
     const okCelular = validarCelular(true);
 
     if (okNombre && okFecha && okCarrera && okSemestre && okCelular) {
+        const paisSeleccionado = codigoPais ? codigoPais.options[codigoPais.selectedIndex].text : '';
         alertaBox.innerHTML = `
             <div class="campo-msg msg-exito" style="padding: 12px; font-size: 0.95rem;">
                 🎉 <strong>¡Solicitud de Contratación enviada con éxito!</strong><br>
                 <strong>Contratante:</strong> ${nombreInput.value.trim()} |
                 <strong>Fecha Inicio:</strong> ${diaInput.value}/${mesInput.value}/${anioInput.value} |
                 <strong>Carrera/Puesto:</strong> ${carreraInput.value.trim()} (${semestreInput.value}) |
-                <strong>Celular:</strong> ${celularInput.value.trim()}
+                <strong>Celular:</strong> ${paisSeleccionado} ${celularInput.value.trim()}
             </div>
         `;
     } else {

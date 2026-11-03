@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -138,7 +138,7 @@
 
         <!-- B) HORARIO (INFALTABLES DIARIOS - SHEETS) -->
         <section id="horario" class="seccion-bloque">
-            <h2 class="titulo-seccion">Horario (Infaltables Diarios - Sheets)</h2>
+            <h2 class="titulo-seccion">Horario </h2>
             <p class="descripcion-seccion">Mi rutina diaria organizada en Google Sheets.</p>
 
             <div class="contenedor-iframe-sheets">
@@ -150,21 +150,27 @@
 
         <!-- C.1) APARTADO DE JUEGOS FAVORITOS (2 DESPLEGABLES CON EL DOM: GÉNERO -> JUEGO -> LOGROS E HISTORIA) -->
         <section id="juegos" class="seccion-bloque">
-            <h2 class="titulo-seccion">Juegos Favoritos (Por Géneros y Logros con DOM)</h2>
+            <h2 class="titulo-seccion">Juegos Favoritos </h2>
             <p class="descripcion-seccion">
-                <strong>Desplegable 1 (Por Género):</strong> Haz clic en un género para desplegar los videojuegos que juego en esa categoría.<br>
-                <strong>Desplegable 2 (Logros e Información):</strong> Haz clic sobre cualquier videojuego para desplegar mis <strong>logros alcanzados, rango y detalles</strong>.
+                <strong>Desplegable 1 (Por Género):</strong> Haz clic en un género para desplegar los videojuegos que
+                juego en esa categoría.<br>
+                <strong>Desplegable 2 (Logros e Información):</strong> Haz clic sobre cualquier videojuego para
+                desplegar mis <strong>logros alcanzados, rango y detalles</strong>.
             </p>
 
             <!-- DESPLEGABLE 1: Botones de Géneros de Videojuegos -->
             <div class="botones-filtro" id="botonesJuegos">
-                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'lucha', this)">Lucha & Artes Marciales (2)</button>
-                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'shooter', this)">Shooters & Battle Royale (3)</button>
-                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'mundo-abierto', this)">Mundo Abierto, RPG & Supervivencia (4)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'lucha', this)">Lucha & Artes Marciales
+                    (2)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'shooter', this)">Shooters & Battle Royale
+                    (3)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'mundo-abierto', this)">Mundo Abierto, RPG
+                    & Supervivencia (4)</button>
                 <button class="btn-filtro" onclick="filtrarSeccion('juegos', 'todos', this)">Ver Todos (9)</button>
             </div>
 
-            <p id="aviso-juegos" class="aviso-desplegable">Selecciona un género arriba para desplegar los videojuegos.</p>
+            <p id="aviso-juegos" class="aviso-desplegable">Selecciona un género arriba para desplegar los videojuegos.
+            </p>
 
             <!-- DESPLEGABLE 2: Tarjetas de Videojuegos (Ocultas al inicio, se despliegan por JS al elegir género y al hacer clic en cada juego) -->
             <div class="grid-tarjetas-filtro contenedor-colapsado" id="lista-juegos">
@@ -176,11 +182,18 @@
                         <span class="icono-desplegar">▼ Ver mis logros</span>
                     </div>
                     <h4>Tekken 8</h4>
-                    <p class="sub-info"><strong>Tiempo de juego:</strong> +500 Horas | <strong>Rango Máximo:</strong> God of Destruction II</p>
+                    <p class="sub-info"><strong>Tiempo de juego:</strong> +500 Horas | <strong>Rango Máximo:</strong>
+                        God of Destruction II</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Mis Logros y Récord Personal:</strong> Acumulé más de <strong>500 horas de juego</strong> dedicadas al competitivo y alcancé el rango <strong>God of Destruction II</strong>, uno de los rangos más altos y exclusivos a nivel mundial. Dominé la ejecución de combos óptimos, el sistema agresivo <em>Heat</em>, castigos por <em>frame data</em> y lectura de rivales en partidas clasificatorias de máxima exigencia.</p>
-                        <p class="mt-2"><strong>Sobre el Juego:</strong> Octava entrega de la saga de Bandai Namco en Unreal Engine 5 que enfrenta a Jin Kazama y Kazuya Mishima en el clímax de la saga Mishima.</p>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Acumulé más de <strong>500 horas de
+                                juego</strong> dedicadas al competitivo y alcancé el rango <strong>God of Destruction
+                                II</strong>, uno de los rangos más altos y exclusivos a nivel mundial. Dominé la
+                            ejecución de combos óptimos, el sistema agresivo <em>Heat</em>, castigos por <em>frame
+                                data</em> y lectura de rivales en partidas clasificatorias de máxima exigencia.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Octava entrega de la saga de Bandai Namco en
+                            Unreal Engine 5 que enfrenta a Jin Kazama y Kazuya Mishima en el clímax de la saga Mishima.
+                        </p>
                     </div>
                 </div>
 
@@ -190,11 +203,20 @@
                         <span class="icono-desplegar">▼ Ver mis logros</span>
                     </div>
                     <h4>Sifu</h4>
-                    <p class="sub-info"><strong>Récord:</strong> Completado con 20 años (Sin perder vidas) | <strong>Final:</strong> Final Secreto (Wude)</p>
+                    <p class="sub-info"><strong>Récord:</strong> Completado con 20 años (Sin perder vidas) |
+                        <strong>Final:</strong> Final Secreto (Wude)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé el juego completando toda la historia terminando con exactamente <strong>20 años de edad sin perder una sola vida (Deathless Run)</strong> en toda la partida. Además, conseguí sacar el <strong>Final Secreto y Verdadero (Wude)</strong>, que es el reto más difícil del juego porque exige romper la barra de estructura de cada uno de los 5 jefes dos veces consecutivas para <strong>perdonarles la vida</strong> sin matarlos, requiriendo precisión absoluta en esquivas y parries.</p>
-                        <p class="mt-2"><strong>Sobre el Juego:</strong> Título de Kung-Fu Pak Mei donde cada muerte te envejece mediante un talismán mágico mientras buscas justicia contra los cinco asesinos de tu maestro.</p>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé el juego completando toda la historia
+                            terminando con exactamente <strong>20 años de edad sin perder una sola vida (Deathless
+                                Run)</strong> en toda la partida. Además, conseguí sacar el <strong>Final Secreto y
+                                Verdadero (Wude)</strong>, que es el reto más difícil del juego porque exige romper la
+                            barra de estructura de cada uno de los 5 jefes dos veces consecutivas para
+                            <strong>perdonarles la vida</strong> sin matarlos, requiriendo precisión absoluta en
+                            esquivas y parries.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Título de Kung-Fu Pak Mei donde cada muerte te
+                            envejece mediante un talismán mágico mientras buscas justicia contra los cinco asesinos de
+                            tu maestro.</p>
                     </div>
                 </div>
 
@@ -205,11 +227,17 @@
                         <span class="icono-desplegar">▼ Ver mis logros</span>
                     </div>
                     <h4>Apex Legends</h4>
-                    <p class="sub-info"><strong>Rango:</strong> 4x Diamante Consecutivo | <strong>Main:</strong> Pathfinder</p>
+                    <p class="sub-info"><strong>Rango:</strong> 4x Diamante Consecutivo | <strong>Main:</strong>
+                        Pathfinder</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Mis Logros y Récord Personal:</strong> Llegué al rango <strong>Diamante en 4 ocasiones consecutivas</strong> jugando principalmente con <strong>Pathfinder</strong>. Dominé las mecánicas avanzadas del gancho (<em>Grappling Hook slingshots</em>), creación de rotaciones estratégicas con tirolina para el escuadrón y toma de altura en <em>lobbies</em> clasificatorios de alto nivel.</p>
-                        <p class="mt-2"><strong>Sobre el Juego:</strong> Battle Royale frenético por escuadrones de Respawn Entertainment ambientado en el universo de <em>Titanfall</em>.</p>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Llegué al rango <strong>Diamante en 4
+                                ocasiones consecutivas</strong> jugando principalmente con <strong>Pathfinder</strong>.
+                            Dominé las mecánicas avanzadas del gancho (<em>Grappling Hook slingshots</em>), creación de
+                            rotaciones estratégicas con tirolina para el escuadrón y toma de altura en <em>lobbies</em>
+                            clasificatorios de alto nivel.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Battle Royale frenético por escuadrones de
+                            Respawn Entertainment ambientado en el universo de <em>Titanfall</em>.</p>
                     </div>
                 </div>
 
@@ -222,8 +250,13 @@
                     <p class="sub-info"><strong>Recompensas:</strong> Drives y Banners de Temporada conseguidos</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Mis Logros y Récord Personal:</strong> Conseguí completar los <strong>Drives de Temporada (Competitive Drives)</strong> y desbloquear los <strong>Banners / Firmas de Temporada</strong> exclusivos del modo competitivo, logrando rachas de victorias sostenidas en partidas clasificatorias por roles bajo presión.</p>
-                        <p class="mt-2"><strong>Sobre el Juego:</strong> Shooter competitivo por equipos 5v5 de Blizzard donde la sinergia de habilidades definitivas y el control de objetivos definen cada partida.</p>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Conseguí completar los <strong>Drives de
+                                Temporada (Competitive Drives)</strong> y desbloquear los <strong>Banners / Firmas de
+                                Temporada</strong> exclusivos del modo competitivo, logrando rachas de victorias
+                            sostenidas en partidas clasificatorias por roles bajo presión.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Shooter competitivo por equipos 5v5 de Blizzard
+                            donde la sinergia de habilidades definitivas y el control de objetivos definen cada partida.
+                        </p>
                     </div>
                 </div>
 
@@ -236,41 +269,58 @@
                     <p class="sub-info"><strong>Estado:</strong> Campaña e Historias de Guerra completadas</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé el juego completo superando todas las <strong>Historias de Guerra</strong> en los distintos frentes de la Primera Guerra Mundial: desde los combates de tanques en Francia y batallas aéreas sobre los Alpes hasta el desierto de Arabia y Galípoli, dominando infantería y vehículos.</p>
-                        <p class="mt-2"><strong>Sobre el Juego:</strong> Aclamado shooter en primera persona de DICE ambientado en la Gran Guerra con escenarios destructibles y gran realismo histórico.</p>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé el juego completo superando todas las
+                            <strong>Historias de Guerra</strong> en los distintos frentes de la Primera Guerra Mundial:
+                            desde los combates de tanques en Francia y batallas aéreas sobre los Alpes hasta el desierto
+                            de Arabia y Galípoli, dominando infantería y vehículos.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Aclamado shooter en primera persona de DICE
+                            ambientado en la Gran Guerra con escenarios destructibles y gran realismo histórico.</p>
                     </div>
                 </div>
 
                 <!-- ================= MUNDO ABIERTO, RPG & SUPERVIVENCIA ================= -->
-                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto" onclick="toggleHistoria(this)">
+                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto"
+                    onclick="toggleHistoria(this)">
                     <div class="card-cabecera">
                         <span class="badge-cat">Supervivencia / Mundo Abierto</span>
                         <span class="icono-desplegar">▼ Ver mis logros</span>
                     </div>
                     <h4>ARK: Survival Evolved</h4>
-                    <p class="sub-info"><strong>Tiempo de juego:</strong> +200 Horas | <strong>Dificultad:</strong> Máxima Dificultad Completada</p>
+                    <p class="sub-info"><strong>Tiempo de juego:</strong> +200 Horas | <strong>Dificultad:</strong>
+                        Máxima Dificultad Completada</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Mis Logros y Récord Personal:</strong> Con más de <strong>200 horas de juego</strong>, logré pasarme ARK en la <strong>dificultad más alta</strong>. Sobreviví al entorno más hostil, domestiqué y crié criaturas de estadísticas perfectas, fabriqué equipamiento <em>Tek</em> y derroté a los jefes de los obeliscos en máxima dificultad.</p>
-                        <p class="mt-2"><strong>Sobre el Juego:</strong> Juego de supervivencia extrema donde debes prosperar en una misteriosa reserva llena de dinosaurios y criaturas prehistóricas.</p>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Con más de <strong>200 horas de
+                                juego</strong>, logré pasarme ARK en la <strong>dificultad más alta</strong>. Sobreviví
+                            al entorno más hostil, domestiqué y crié criaturas de estadísticas perfectas, fabriqué
+                            equipamiento <em>Tek</em> y derroté a los jefes de los obeliscos en máxima dificultad.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Juego de supervivencia extrema donde debes
+                            prosperar en una misteriosa reserva llena de dinosaurios y criaturas prehistóricas.</p>
                     </div>
                 </div>
 
-                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto" onclick="toggleHistoria(this)">
+                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto"
+                    onclick="toggleHistoria(this)">
                     <div class="card-cabecera">
                         <span class="badge-cat">RPG de Acción / Mundo Abierto</span>
                         <span class="icono-desplegar">▼ Ver mis logros</span>
                     </div>
                     <h4>Assassin's Creed Valhalla</h4>
-                    <p class="sub-info"><strong>Estado:</strong> Completado en la Dificultad Más Alta (Pesadilla / Drengr)</p>
+                    <p class="sub-info"><strong>Estado:</strong> Completado en la Dificultad Más Alta (Pesadilla /
+                        Drengr)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé la extensa campaña de <strong>Assassin's Creed Valhalla en la dificultad más alta</strong>, conquistando todos los territorios de Inglaterra y Noruega con Eivor, derrotando a los Zelotes de la Orden de los Antiguos, bestias míticas y asedios de fortalezas sin margen de error.</p>
-                        <p class="mt-2"><strong>Sobre el Juego:</strong> Épica aventura vikinga del siglo IX donde lideras al Clan del Cuervo para forjar un nuevo hogar en tierras anglosajonas.</p>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé la extensa campaña de
+                            <strong>Assassin's Creed Valhalla en la dificultad más alta</strong>, conquistando todos los
+                            territorios de Inglaterra y Noruega con Eivor, derrotando a los Zelotes de la Orden de los
+                            Antiguos, bestias míticas y asedios de fortalezas sin margen de error.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Épica aventura vikinga del siglo IX donde
+                            lideras al Clan del Cuervo para forjar un nuevo hogar en tierras anglosajonas.</p>
                     </div>
                 </div>
 
-                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto" onclick="toggleHistoria(this)">
+                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto"
+                    onclick="toggleHistoria(this)">
                     <div class="card-cabecera">
                         <span class="badge-cat">RPG de Acción / Mundo Abierto</span>
                         <span class="icono-desplegar">▼ Ver mis logros</span>
@@ -279,12 +329,17 @@
                     <p class="sub-info"><strong>Estado:</strong> Completado en la Dificultad Más Alta (Pesadilla)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Mis Logros y Récord Personal:</strong> Al igual que Valhalla, me pasé <strong>Assassin's Creed Origins en la dificultad más alta</strong>. Superé todos los jefes, Phylakes (cazarrecompensas), arenas de gladiadores y elefantes de guerra en el Antiguo Egipto donde cualquier golpe enemigo es letal.</p>
-                        <p class="mt-2"><strong>Sobre el Juego:</strong> Narra la historia de Bayek de Siwa y Aya en el Egipto ptolemaico y el nacimiento de la Hermandad de los Asesinos.</p>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Al igual que Valhalla, me pasé
+                            <strong>Assassin's Creed Origins en la dificultad más alta</strong>. Superé todos los jefes,
+                            Phylakes (cazarrecompensas), arenas de gladiadores y elefantes de guerra en el Antiguo
+                            Egipto donde cualquier golpe enemigo es letal.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Narra la historia de Bayek de Siwa y Aya en el
+                            Egipto ptolemaico y el nacimiento de la Hermandad de los Asesinos.</p>
                     </div>
                 </div>
 
-                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto" onclick="toggleHistoria(this)">
+                <div class="card-filtro card card-interactiva" data-categoria="mundo-abierto"
+                    onclick="toggleHistoria(this)">
                     <div class="card-cabecera">
                         <span class="badge-cat">Acción-Aventura / Mundo Abierto</span>
                         <span class="icono-desplegar">▼ Ver mis logros</span>
@@ -293,8 +348,12 @@
                     <p class="sub-info"><strong>Estado:</strong> Historia Principal Completada</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé toda la campaña principal de <strong>GTA V</strong> de principio a fin, planificando y ejecutando con éxito todos los grandes golpes (<em>Heists</em>) al banco, joyería y el Gran Golpe al Union Depository alternando entre Michael, Franklin y Trevor.</p>
-                        <p class="mt-2"><strong>Sobre el Juego:</strong> Obra maestra de mundo abierto de Rockstar Games ambientada en la vibrante ciudad de Los Santos y el condado de Blaine.</p>
+                        <p><strong>Mis Logros y Récord Personal:</strong> Me pasé toda la campaña principal de
+                            <strong>GTA V</strong> de principio a fin, planificando y ejecutando con éxito todos los
+                            grandes golpes (<em>Heists</em>) al banco, joyería y el Gran Golpe al Union Depository
+                            alternando entre Michael, Franklin y Trevor.</p>
+                        <p class="mt-2"><strong>Sobre el Juego:</strong> Obra maestra de mundo abierto de Rockstar Games
+                            ambientada en la vibrante ciudad de Los Santos y el condado de Blaine.</p>
                     </div>
                 </div>
 
@@ -303,23 +362,30 @@
 
         <!-- C.2) APARTADO DE MÚSICA FAVORITA (2 NIVELES INTERACTIVOS CON EL DOM: GÉNERO -> CANCIÓN -> HISTORIA) -->
         <section id="musica" class="seccion-bloque">
-            <h2 class="titulo-seccion">Música Favorita (Por Géneros e Historia con DOM)</h2>
+            <h2 class="titulo-seccion">Músicas Favoritas</h2>
             <p class="descripcion-seccion">
                 <strong>Paso 1:</strong> Elige un género musical para ver las canciones que me gustan de ese estilo.<br>
-                <strong>Paso 2:</strong> Haz clic sobre cualquier canción para desplegar su <strong>historia e información completa</strong>.
+                <strong>Paso 2:</strong> Haz clic sobre cualquier canción para desplegar su <strong>historia e
+                    información completa</strong>.
             </p>
 
             <!-- NIVEL 1: Botones de Géneros Musicales (Filtrado DOM con dataset.categoria) -->
             <div class="botones-filtro" id="botonesMusica">
-                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'indie', this)">Indie Rock & Psicodélico (6)</button>
-                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'punk-emo', this)">Emo, Pop Punk & Punk Rock (5)</button>
-                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'metal', this)">Heavy, Power Metal & Core (5)</button>
-                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'prog-jrock', this)">Rock Progresivo & J-Rock (3)</button>
-                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'pop-folk', this)">Pop, Funk & Indie Latino (3)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'indie', this)">Indie Rock & Psicodélico
+                    (6)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'punk-emo', this)">Emo, Pop Punk & Punk
+                    Rock (5)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'metal', this)">Heavy, Power Metal & Core
+                    (5)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'prog-jrock', this)">Rock Progresivo &
+                    J-Rock (3)</button>
+                <button class="btn-filtro" onclick="filtrarSeccion('musica', 'pop-folk', this)">Pop, Funk & Indie Latino
+                    (3)</button>
                 <button class="btn-filtro" onclick="filtrarSeccion('musica', 'todos', this)">Ver Todas (22)</button>
             </div>
 
-            <p id="aviso-musica" class="aviso-desplegable">Selecciona un género musical arriba para desplegar las canciones.</p>
+            <p id="aviso-musica" class="aviso-desplegable">Selecciona un género musical arriba para desplegar las
+                canciones.</p>
 
             <!-- NIVEL 2: Catálogo de 22 Canciones (Se despliega por JS al apretar un género, y cada canción despliega su historia al hacerle clic) -->
             <div class="grid-tarjetas-filtro contenedor-colapsado" id="lista-musica">
@@ -334,7 +400,12 @@
                     <p class="sub-info"><strong>Álbum:</strong> Room on Fire (2003)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Lanzada como el segundo sencillo de <em>Room on Fire</em>, fue compuesta por Julian Casablancas en Nueva York. Su icónico riff de guitarra entrelazado entre Nick Valensi y Albert Hammond Jr. retrata la tensión de una relación nocturna intensa donde ninguno de los dos quiere ceder. Se convirtió en una de las canciones más famosas de la historia del Indie Rock y de videojuegos como <em>Guitar Hero III</em>.</p>
+                        <p><strong>Historia y Significado:</strong> Lanzada como el segundo sencillo de <em>Room on
+                                Fire</em>, fue compuesta por Julian Casablancas en Nueva York. Su icónico riff de
+                            guitarra entrelazado entre Nick Valensi y Albert Hammond Jr. retrata la tensión de una
+                            relación nocturna intensa donde ninguno de los dos quiere ceder. Se convirtió en una de las
+                            canciones más famosas de la historia del Indie Rock y de videojuegos como <em>Guitar Hero
+                                III</em>.</p>
                     </div>
                 </div>
 
@@ -347,7 +418,10 @@
                     <p class="sub-info"><strong>Álbum:</strong> Angles (2011)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Abre el cuarto álbum de la banda (<em>Angles</em>), marcando el regreso de The Strokes tras cinco años de pausa. Combina ritmos bailables de reggae/new wave con guitarras afiladas, mientras su letra utiliza la ciudadela inca de Machu Picchu como metáfora de subir a la cima del mundo moderno y el desgaste de la fama.</p>
+                        <p><strong>Historia y Significado:</strong> Abre el cuarto álbum de la banda (<em>Angles</em>),
+                            marcando el regreso de The Strokes tras cinco años de pausa. Combina ritmos bailables de
+                            reggae/new wave con guitarras afiladas, mientras su letra utiliza la ciudadela inca de Machu
+                            Picchu como metáfora de subir a la cima del mundo moderno y el desgaste de la fama.</p>
                     </div>
                 </div>
 
@@ -360,7 +434,10 @@
                     <p class="sub-info"><strong>Álbum:</strong> Is This It (2001)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Uno de los himnos definitivos de principios de los 2000. Julian Casablancas escribió una canción llena de nostalgia anticipada sobre extrañar los "buenos viejos tiempos" de juventud con amigos incluso mientras todavía los estaban viviendo. Su videoclip incluye cameos de bandas como Slash y Guided by Voices.</p>
+                        <p><strong>Historia y Significado:</strong> Uno de los himnos definitivos de principios de los
+                            2000. Julian Casablancas escribió una canción llena de nostalgia anticipada sobre extrañar
+                            los "buenos viejos tiempos" de juventud con amigos incluso mientras todavía los estaban
+                            viviendo. Su videoclip incluye cameos de bandas como Slash y Guided by Voices.</p>
                     </div>
                 </div>
 
@@ -373,7 +450,10 @@
                     <p class="sub-info"><strong>Álbum:</strong> Franz Ferdinand (2004)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> La banda escocesa revolucionó el rock bailable con esta canción que cambia drásticamente de tempo a mitad del primer minuto. Usa un duelo de francotiradores (inspirado también en el asesinato del Archiduque Francisco Fernando) como metáfora de la tensión romántica entre dos personas en una fiesta.</p>
+                        <p><strong>Historia y Significado:</strong> La banda escocesa revolucionó el rock bailable con
+                            esta canción que cambia drásticamente de tempo a mitad del primer minuto. Usa un duelo de
+                            francotiradores (inspirado también en el asesinato del Archiduque Francisco Fernando) como
+                            metáfora de la tensión romántica entre dos personas en una fiesta.</p>
                     </div>
                 </div>
 
@@ -386,7 +466,10 @@
                     <p class="sub-info"><strong>Sencillo:</strong> Looking Out for You (2015)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Grabada por los jóvenes músicos de Filadelfia Arthur Shea y Sachi DiSerafino cuando apenas eran adolescentes. Con su banjo/guitarra acelerada y su tono desenfadado, confiesa los nervios de estar enamorado de alguien en secreto mientras intenta cuidarla desde lejos. Años después se volvió un fenómeno mundial.</p>
+                        <p><strong>Historia y Significado:</strong> Grabada por los jóvenes músicos de Filadelfia Arthur
+                            Shea y Sachi DiSerafino cuando apenas eran adolescentes. Con su banjo/guitarra acelerada y
+                            su tono desenfadado, confiesa los nervios de estar enamorado de alguien en secreto mientras
+                            intenta cuidarla desde lejos. Años después se volvió un fenómeno mundial.</p>
                     </div>
                 </div>
 
@@ -399,7 +482,10 @@
                     <p class="sub-info"><strong>Artista:</strong> Kevin Parker (Tame Impala)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> El proyecto solista del australiano Kevin Parker (quien graba todos los instrumentos por sí mismo) explora en sus temas la sensación de sentirse un "perdedor" o un extraño frente al desamor, el paso del tiempo y la inseguridad personal, envuelto en bajos hipnóticos, sintetizadores retro y psicodelia moderna.</p>
+                        <p><strong>Historia y Significado:</strong> El proyecto solista del australiano Kevin Parker
+                            (quien graba todos los instrumentos por sí mismo) explora en sus temas la sensación de
+                            sentirse un "perdedor" o un extraño frente al desamor, el paso del tiempo y la inseguridad
+                            personal, envuelto en bajos hipnóticos, sintetizadores retro y psicodelia moderna.</p>
                     </div>
                 </div>
 
@@ -413,7 +499,10 @@
                     <p class="sub-info"><strong>Álbum:</strong> The Black Parade (2006)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Dentro de la ópera rock <em>The Black Parade</em>, representa el momento doloroso en el que "El Paciente" se despide de su pareja al darse cuenta de que el amor se ha roto. Su videoclip en blanco y negro fue dirigido por Marc Webb y muestra la carga emocional de decir adiós con honestidad.</p>
+                        <p><strong>Historia y Significado:</strong> Dentro de la ópera rock <em>The Black Parade</em>,
+                            representa el momento doloroso en el que "El Paciente" se despide de su pareja al darse
+                            cuenta de que el amor se ha roto. Su videoclip en blanco y negro fue dirigido por Marc Webb
+                            y muestra la carga emocional de decir adiós con honestidad.</p>
                     </div>
                 </div>
 
@@ -426,7 +515,12 @@
                     <p class="sub-info"><strong>Álbum:</strong> The Black Parade (2006)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Es el clímax de <em>The Black Parade</em>. Gerard Way la escribió para salvar a su hermano Mikey Way de una profunda depresión mientras grababan en la supuesta mansión embrujada "The Paramour". Su coro (<em>"I am not afraid to keep on living, I am not afraid to walk this world alone"</em>) es un himno de supervivencia. Durante la filmación del video, el baterista Bob Bryar sufrió quemaduras reales y Gerard se rompió los ligamentos del pie.</p>
+                        <p><strong>Historia y Significado:</strong> Es el clímax de <em>The Black Parade</em>. Gerard
+                            Way la escribió para salvar a su hermano Mikey Way de una profunda depresión mientras
+                            grababan en la supuesta mansión embrujada "The Paramour". Su coro (<em>"I am not afraid to
+                                keep on living, I am not afraid to walk this world alone"</em>) es un himno de
+                            supervivencia. Durante la filmación del video, el baterista Bob Bryar sufrió quemaduras
+                            reales y Gerard se rompió los ligamentos del pie.</p>
                     </div>
                 </div>
 
@@ -439,7 +533,10 @@
                     <p class="sub-info"><strong>Álbum:</strong> The Black Parade (2006)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Comienza con grabaciones reales en cinta que hizo Gerard Way hablando dormido sobre los terrores nocturnos y parálisis del sueño que sufría en la mansión Paramour. La canción crece desde un piano melancólico hasta un muro de guitarras devastador mientras grita <em>"Just sleep!"</em>.</p>
+                        <p><strong>Historia y Significado:</strong> Comienza con grabaciones reales en cinta que hizo
+                            Gerard Way hablando dormido sobre los terrores nocturnos y parálisis del sueño que sufría en
+                            la mansión Paramour. La canción crece desde un piano melancólico hasta un muro de guitarras
+                            devastador mientras grita <em>"Just sleep!"</em>.</p>
                     </div>
                 </div>
 
@@ -452,7 +549,11 @@
                     <p class="sub-info"><strong>Álbum:</strong> American Idiot (2004)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Una obra maestra de más de 9 minutos dividida en 5 actos (<em>Jesus of Suburbia, City of the Damned, I Don't Care, Dearly Beloved</em> y <em>Tales of Another Broken Home</em>). Cuenta la historia de "Jimmy", un joven desencantado que huye de su pequeño pueblo lleno de hipocresía hacia la gran ciudad buscando darle sentido a su vida.</p>
+                        <p><strong>Historia y Significado:</strong> Una obra maestra de más de 9 minutos dividida en 5
+                            actos (<em>Jesus of Suburbia, City of the Damned, I Don't Care, Dearly Beloved</em> y
+                            <em>Tales of Another Broken Home</em>). Cuenta la historia de "Jimmy", un joven desencantado
+                            que huye de su pequeño pueblo lleno de hipocresía hacia la gran ciudad buscando darle
+                            sentido a su vida.</p>
                     </div>
                 </div>
 
@@ -465,7 +566,11 @@
                     <p class="sub-info"><strong>Álbum:</strong> Take Off Your Pants and Jacket (2001)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Cuando el mánager de la banda les dijo que al álbum le faltaba un sencillo veraniego pegadizo, Mark Hoppus escribió <em>The Rock Show</em> en solo 10 minutos sobre enamorarse de una chica en un concierto punk. Con el presupuesto que la disquera les dio para el videoclip, salieron a la calle a regalar dinero en efectivo, destruir un auto y soltar palomas.</p>
+                        <p><strong>Historia y Significado:</strong> Cuando el mánager de la banda les dijo que al álbum
+                            le faltaba un sencillo veraniego pegadizo, Mark Hoppus escribió <em>The Rock Show</em> en
+                            solo 10 minutos sobre enamorarse de una chica en un concierto punk. Con el presupuesto que
+                            la disquera les dio para el videoclip, salieron a la calle a regalar dinero en efectivo,
+                            destruir un auto y soltar palomas.</p>
                     </div>
                 </div>
 
@@ -479,7 +584,11 @@
                     <p class="sub-info"><strong>Álbum:</strong> Nightmare (2010)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Es la canción principal del quinto álbum de A7X, marcada por el fallecimiento de su legendario baterista Jimmy "The Rev" Sullivan en diciembre de 2009, quien dejó grabadas las maquetas de batería antes de morir. Mike Portnoy (Dream Theater) grabó la batería final en su honor, convirtiéndola en uno de los temas más oscuros y potentes del metal moderno.</p>
+                        <p><strong>Historia y Significado:</strong> Es la canción principal del quinto álbum de A7X,
+                            marcada por el fallecimiento de su legendario baterista Jimmy "The Rev" Sullivan en
+                            diciembre de 2009, quien dejó grabadas las maquetas de batería antes de morir. Mike Portnoy
+                            (Dream Theater) grabó la batería final en su honor, convirtiéndola en uno de los temas más
+                            oscuros y potentes del metal moderno.</p>
                     </div>
                 </div>
 
@@ -492,7 +601,11 @@
                     <p class="sub-info"><strong>Álbum:</strong> City of Evil (2005)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Inspirada en la novela y película <em>Fear and Loathing in Las Vegas</em> (Pánico y locura en Las Vegas) del periodista Hunter S. Thompson. Su frase inicial (<em>"He who makes a beast out of himself gets rid of the pain of being a man"</em>) y el duelo de solos gemelos entre Synyster Gates y Zacky Vengeance catapultaron a la banda al estrellato mundial.</p>
+                        <p><strong>Historia y Significado:</strong> Inspirada en la novela y película <em>Fear and
+                                Loathing in Las Vegas</em> (Pánico y locura en Las Vegas) del periodista Hunter S.
+                            Thompson. Su frase inicial (<em>"He who makes a beast out of himself gets rid of the pain of
+                                being a man"</em>) y el duelo de solos gemelos entre Synyster Gates y Zacky Vengeance
+                            catapultaron a la banda al estrellato mundial.</p>
                     </div>
                 </div>
 
@@ -505,7 +618,11 @@
                     <p class="sub-info"><strong>Álbum:</strong> Dawn of Victory (2000)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Tercer capítulo de las <em>Crónicas de Algalord (Emerald Sword Saga)</em> creado por Luca Turilli y Alex Staropoli con la voz épica de Fabio Lione. Combina coros orquestales, música barroca y doble bombo a toda velocidad para narrar la batalla del Guerrero de Hielo contra el señor oscuro Akron por las tierras encantadas.</p>
+                        <p><strong>Historia y Significado:</strong> Tercer capítulo de las <em>Crónicas de Algalord
+                                (Emerald Sword Saga)</em> creado por Luca Turilli y Alex Staropoli con la voz épica de
+                            Fabio Lione. Combina coros orquestales, música barroca y doble bombo a toda velocidad para
+                            narrar la batalla del Guerrero de Hielo contra el señor oscuro Akron por las tierras
+                            encantadas.</p>
                     </div>
                 </div>
 
@@ -518,7 +635,11 @@
                     <p class="sub-info"><strong>Álbum:</strong> Magos, Espadas y Rosas (1990)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> El himno más grande del Heavy Metal en español. Compuesta por el guitarrista argentino Walter Giardino y cantada por Adrián Barilari, narra la historia de un mago solitario en un bosque encantado que se enamora de un hada y lucha contra el mal cuando ella cae en un sueño profundo, coronada por uno de los solos neoclásicos más famosos del continente.</p>
+                        <p><strong>Historia y Significado:</strong> El himno más grande del Heavy Metal en español.
+                            Compuesta por el guitarrista argentino Walter Giardino y cantada por Adrián Barilari, narra
+                            la historia de un mago solitario en un bosque encantado que se enamora de un hada y lucha
+                            contra el mal cuando ella cae en un sueño profundo, coronada por uno de los solos
+                            neoclásicos más famosos del continente.</p>
                     </div>
                 </div>
 
@@ -531,12 +652,16 @@
                     <p class="sub-info"><strong>Artista:</strong> Falling In Reverse (Ronnie Radke)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> La banda liderada por Ronnie Radke ( cuyo nombre completo es Ronald Joseph Radke ) revolucionó la escena mezclando Post-Hardcore, Metalcore, Rap y arreglos cinematográficos. Sus canciones relatan sus batallas internas contra sus demonios personales, la crítica social y su redención en la música.</p>
+                        <p><strong>Historia y Significado:</strong> La banda liderada por Ronnie Radke ( cuyo nombre
+                            completo es Ronald Joseph Radke ) revolucionó la escena mezclando Post-Hardcore, Metalcore,
+                            Rap y arreglos cinematográficos. Sus canciones relatan sus batallas internas contra sus
+                            demonios personales, la crítica social y su redención en la música.</p>
                     </div>
                 </div>
 
                 <!-- ================= ROCK PROGRESIVO & J-ROCK ================= -->
-                <div class="card-filtro card card-interactiva" data-categoria="prog-jrock" onclick="toggleHistoria(this)">
+                <div class="card-filtro card card-interactiva" data-categoria="prog-jrock"
+                    onclick="toggleHistoria(this)">
                     <div class="card-cabecera">
                         <span class="badge-cat">Space Rock / Progressive Rock</span>
                         <span class="icono-desplegar">▼ Ver historia</span>
@@ -545,11 +670,16 @@
                     <p class="sub-info"><strong>Álbum:</strong> Black Holes and Revelations (2006)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Cierra el álbum <em>Black Holes and Revelations</em> fusionando el sonido de los westerns espagueti de Ennio Morricone (y el éxito de los años 60 <em>Telstar</em>, grabado por el padre de Matt Bellamy) con rock espacial futurista. "Cydonia" es una región real del planeta Marte, y su mensaje llama a levantarse y luchar por nuestros derechos (<em>"No one's gonna take me alive!"</em>).</p>
+                        <p><strong>Historia y Significado:</strong> Cierra el álbum <em>Black Holes and Revelations</em>
+                            fusionando el sonido de los westerns espagueti de Ennio Morricone (y el éxito de los años 60
+                            <em>Telstar</em>, grabado por el padre de Matt Bellamy) con rock espacial futurista.
+                            "Cydonia" es una región real del planeta Marte, y su mensaje llama a levantarse y luchar por
+                            nuestros derechos (<em>"No one's gonna take me alive!"</em>).</p>
                     </div>
                 </div>
 
-                <div class="card-filtro card card-interactiva" data-categoria="prog-jrock" onclick="toggleHistoria(this)">
+                <div class="card-filtro card card-interactiva" data-categoria="prog-jrock"
+                    onclick="toggleHistoria(this)">
                     <div class="card-cabecera">
                         <span class="badge-cat">Hard Rock Alternativo / Progresivo</span>
                         <span class="icono-desplegar">▼ Ver historia</span>
@@ -558,11 +688,15 @@
                     <p class="sub-info"><strong>Álbum:</strong> Drones (2015)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Toma su nombre de los drones militares "MQ-9 Reaper". Con un intro en tapping de guitarra de Matt Bellamy e influencias de Rage Against the Machine y AC/DC, narra la angustia de la guerra moderna donde la muerte cae desde el cielo controlada a distancia tras una pantalla sin empatía humana.</p>
+                        <p><strong>Historia y Significado:</strong> Toma su nombre de los drones militares "MQ-9
+                            Reaper". Con un intro en tapping de guitarra de Matt Bellamy e influencias de Rage Against
+                            the Machine y AC/DC, narra la angustia de la guerra moderna donde la muerte cae desde el
+                            cielo controlada a distancia tras una pantalla sin empatía humana.</p>
                     </div>
                 </div>
 
-                <div class="card-filtro card card-interactiva" data-categoria="prog-jrock" onclick="toggleHistoria(this)">
+                <div class="card-filtro card card-interactiva" data-categoria="prog-jrock"
+                    onclick="toggleHistoria(this)">
                     <div class="card-cabecera">
                         <span class="badge-cat">J-Rock / Alternative Mixture Rock</span>
                         <span class="icono-desplegar">▼ Ver historia</span>
@@ -571,7 +705,11 @@
                     <p class="sub-info"><strong>Artista:</strong> King Gnu (Japón)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> King Gnu, liderada por Daiki Tsuneta y la voz de Satoru Iguchi, es una de las bandas japonesas más innovadoras de la actualidad. Su estilo "Tokyo New Mixture Style" combina J-Rock alternativo, funk oscuro, cuerdas dramáticas y falsetes intensos, explorando la dualidad entre el amor y el odio (<em>Alegría y Tormento / Aizou</em>).</p>
+                        <p><strong>Historia y Significado:</strong> King Gnu, liderada por Daiki Tsuneta y la voz de
+                            Satoru Iguchi, es una de las bandas japonesas más innovadoras de la actualidad. Su estilo
+                            "Tokyo New Mixture Style" combina J-Rock alternativo, funk oscuro, cuerdas dramáticas y
+                            falsetes intensos, explorando la dualidad entre el amor y el odio (<em>Alegría y Tormento /
+                                Aizou</em>).</p>
                     </div>
                 </div>
 
@@ -585,7 +723,10 @@
                     <p class="sub-info"><strong>Banda Sonora:</strong> Despicable Me (Mi Villano Favorito, 2010)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Compuesta e interpretada por Pharrell Williams para la primera película de <em>Mi Villano Favorito</em> (antes de su megaéxito <em>Happy</em> en la secuela). Combina un ritmo retro de funk y soul de los años 60 con una letra que contrasta el carácter gruñón de Gru frente a un día soleado lleno de diversión.</p>
+                        <p><strong>Historia y Significado:</strong> Compuesta e interpretada por Pharrell Williams para
+                            la primera película de <em>Mi Villano Favorito</em> (antes de su megaéxito <em>Happy</em> en
+                            la secuela). Combina un ritmo retro de funk y soul de los años 60 con una letra que
+                            contrasta el carácter gruñón de Gru frente a un día soleado lleno de diversión.</p>
                     </div>
                 </div>
 
@@ -598,7 +739,10 @@
                     <p class="sub-info"><strong>Álbum:</strong> Origins / Wifi Ralph (2018)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> Creada para los créditos de <em>Ralph Breaks the Internet</em>. Aunque su música tiene un ritmo alegre y electrónico, Dan Reynolds explicó que la letra habla sobre la lucha contra el vacío emocional y sentirse como un "cero" en medio de la era digital, reflejando la búsqueda de autoaceptación de Ralph.</p>
+                        <p><strong>Historia y Significado:</strong> Creada para los créditos de <em>Ralph Breaks the
+                                Internet</em>. Aunque su música tiene un ritmo alegre y electrónico, Dan Reynolds
+                            explicó que la letra habla sobre la lucha contra el vacío emocional y sentirse como un
+                            "cero" en medio de la era digital, reflejando la búsqueda de autoaceptación de Ralph.</p>
                     </div>
                 </div>
 
@@ -611,7 +755,10 @@
                     <p class="sub-info"><strong>Artista:</strong> Jósean Log (México)</p>
                     <div class="historia-desplegable">
                         <hr>
-                        <p><strong>Historia y Significado:</strong> El cantautor mexicano Jósean Log destaca por sus melodías cálidas con ukelele, percusiones orgánicas y letras honestas. La canción habla sobre la libertad de ser uno mismo en el amor sin intentar "domar" ni cambiar la esencia de la otra persona.</p>
+                        <p><strong>Historia y Significado:</strong> El cantautor mexicano Jósean Log destaca por sus
+                            melodías cálidas con ukelele, percusiones orgánicas y letras honestas. La canción habla
+                            sobre la libertad de ser uno mismo en el amor sin intentar "domar" ni cambiar la esencia de
+                            la otra persona.</p>
                     </div>
                 </div>
 
@@ -621,7 +768,9 @@
         <!-- C.3) APARTADO DE PROYECTOS REALIZADOS (C#, ASP.NET y SQL SERVER EXPRESS) -->
         <section id="proyectos" class="seccion-bloque">
             <h2 class="titulo-seccion">Mis Proyectos de Software</h2>
-            <p class="descripcion-seccion">Proyectos desarrollados en <strong>C#</strong> con tecnología <strong>ASP.NET</strong> y arquitectura conectada a base de datos <strong>SQL Server Express</strong>:</p>
+            <p class="descripcion-seccion">Proyectos desarrollados en <strong>C#</strong> con tecnología
+                <strong>ASP.NET</strong> y arquitectura conectada a base de datos <strong>SQL Server Express</strong>:
+            </p>
 
             <div class="grid-tarjetas-filtro" id="lista-proyectos">
                 <!-- 1. BancoBNB -->
@@ -631,7 +780,9 @@
                     </div>
                     <h4>BancoBNB</h4>
                     <p class="sub-info"><strong>Stack:</strong> C# • ASP.NET • SQL Server Express</p>
-                    <p>Sistema bancario transaccional enfocado en la gestión de cuentas de ahorro y cuentas corrientes, transferencias entre usuarios, registro de depósitos, retiros y auditoría de transacciones financieras en tiempo real con alta integridad de datos.</p>
+                    <p>Sistema bancario transaccional enfocado en la gestión de cuentas de ahorro y cuentas corrientes,
+                        transferencias entre usuarios, registro de depósitos, retiros y auditoría de transacciones
+                        financieras en tiempo real con alta integridad de datos.</p>
                 </div>
 
                 <!-- 2. GestionMedica -->
@@ -641,7 +792,9 @@
                     </div>
                     <h4>GestionMedica</h4>
                     <p class="sub-info"><strong>Stack:</strong> C# • ASP.NET • SQL Server Express</p>
-                    <p>Plataforma para centros de salud que automatiza el agendamiento de citas médicas, registro de pacientes, expedientes e historial clínico digital, control de especialidades, asignación de médicos y disponibilidad de consultorios.</p>
+                    <p>Plataforma para centros de salud que automatiza el agendamiento de citas médicas, registro de
+                        pacientes, expedientes e historial clínico digital, control de especialidades, asignación de
+                        médicos y disponibilidad de consultorios.</p>
                 </div>
 
                 <!-- 3. InscripcionesUniversidad -->
@@ -651,7 +804,9 @@
                     </div>
                     <h4>InscripcionesUniversidad</h4>
                     <p class="sub-info"><strong>Stack:</strong> C# • ASP.NET • SQL Server Express</p>
-                    <p>Sistema integral de matrícula universitaria que gestiona la oferta de asignaturas por semestre, control de cupos en aulas, inscripción de materias por parte del alumno, asignación docente y registro de calificaciones.</p>
+                    <p>Sistema integral de matrícula universitaria que gestiona la oferta de asignaturas por semestre,
+                        control de cupos en aulas, inscripción de materias por parte del alumno, asignación docente y
+                        registro de calificaciones.</p>
                 </div>
 
                 <!-- 4. ProyectoBusquedaTrabajo -->
@@ -661,7 +816,9 @@
                     </div>
                     <h4>ProyectoBusquedaTrabajo</h4>
                     <p class="sub-info"><strong>Stack:</strong> C# • ASP.NET • SQL Server Express</p>
-                    <p>Portal web de reclutamiento laboral que conecta postulantes con empresas reclutadoras. Permite la publicación de ofertas de empleo por categoría, postulación con currículum vitae (CV) y seguimiento del estado de cada postulación.</p>
+                    <p>Portal web de reclutamiento laboral que conecta postulantes con empresas reclutadoras. Permite la
+                        publicación de ofertas de empleo por categoría, postulación con currículum vitae (CV) y
+                        seguimiento del estado de cada postulación.</p>
                 </div>
             </div>
         </section>
@@ -683,7 +840,8 @@
         <section id="contratacion" class="seccion-bloque">
             <h2 class="titulo-seccion">Formulario de Contratación</h2>
             <p class="descripcion-seccion">
-                ¿Deseas contratar mis servicios o integrarme a tu equipo? Completa los datos de contratación. Cada sector valida en tiempo real lo que falta llenar sin esperar a que presiones el botón:
+                ¿Deseas contratar mis servicios o integrarme a tu equipo? Completa los datos de contratación. Cada
+                sector valida en tiempo real lo que falta llenar sin esperar a que presiones el botón:
             </p>
 
             <div class="tarjeta form-contratacion-box">
@@ -727,15 +885,217 @@
                             <option value="7mo Semestre (Freelance)">7mo Semestre (Freelance)</option>
                             <option value="8vo Semestre (Freelance)">8vo Semestre (Freelance)</option>
                             <option value="9no Semestre (Tiempo Completo)">9no Semestre (Tiempo Completo)</option>
-                            <option value="10mo Semestre / Egresado (Tiempo Completo)">10mo Semestre / Egresado (Tiempo Completo)</option>
+                            <option value="10mo Semestre / Egresado (Tiempo Completo)">10mo Semestre / Egresado (Tiempo
+                                Completo)</option>
                         </select>
                         <div id="msgSemestre" class="campo-msg oculto"></div>
                     </div>
 
-                    <!-- 5. Sector Número de Celular -->
+                    <!-- 5. Sector País y Número de Celular (195 Países) -->
                     <div class="campo-form">
-                        <label for="celular">Número de Celular de Contacto (8 dígitos):</label>
-                        <input type="tel" id="celular" placeholder="Ej. 71234567" maxlength="8">
+                        <label for="celular">País y Número de Celular de Contacto (mínimo 8 dígitos):</label>
+                        <div class="telefono-grupo">
+                            <select id="codigoPais">
+                                <option value="">-- Selecciona el País (195 Países) --</option>
+                                <option value="+93">Afganistán (+93)</option>
+                                <option value="+355">Albania (+355)</option>
+                                <option value="+49">Alemania (+49)</option>
+                                <option value="+376">Andorra (+376)</option>
+                                <option value="+244">Angola (+244)</option>
+                                <option value="+1-268">Antigua y Barbuda (+1-268)</option>
+                                <option value="+966">Arabia Saudita (+966)</option>
+                                <option value="+213">Argelia (+213)</option>
+                                <option value="+54">Argentina (+54)</option>
+                                <option value="+374">Armenia (+374)</option>
+                                <option value="+61">Australia (+61)</option>
+                                <option value="+43">Austria (+43)</option>
+                                <option value="+994">Azerbaiyán (+994)</option>
+                                <option value="+1-242">Bahamas (+1-242)</option>
+                                <option value="+880">Bangladés (+880)</option>
+                                <option value="+1-246">Barbados (+1-246)</option>
+                                <option value="+973">Baréin (+973)</option>
+                                <option value="+32">Bélgica (+32)</option>
+                                <option value="+501">Belice (+501)</option>
+                                <option value="+229">Benín (+229)</option>
+                                <option value="+375">Bielorrusia (+375)</option>
+                                <option value="+95">Birmania (Myanmar) (+95)</option>
+                                <option value="+591" selected>Bolivia (+591)</option>
+                                <option value="+387">Bosnia y Herzegovina (+387)</option>
+                                <option value="+267">Botsuana (+267)</option>
+                                <option value="+55">Brasil (+55)</option>
+                                <option value="+673">Brunéi (+673)</option>
+                                <option value="+359">Bulgaria (+359)</option>
+                                <option value="+226">Burkina Faso (+226)</option>
+                                <option value="+257">Burundi (+257)</option>
+                                <option value="+975">Bután (+975)</option>
+                                <option value="+238">Cabo Verde (+238)</option>
+                                <option value="+855">Camboya (+855)</option>
+                                <option value="+237">Camerún (+237)</option>
+                                <option value="+1">Canadá (+1)</option>
+                                <option value="+974">Catar (+974)</option>
+                                <option value="+235">Chad (+235)</option>
+                                <option value="+56">Chile (+56)</option>
+                                <option value="+86">China (+86)</option>
+                                <option value="+357">Chipre (+357)</option>
+                                <option value="+57">Colombia (+57)</option>
+                                <option value="+269">Comoras (+269)</option>
+                                <option value="+850">Corea del Norte (+850)</option>
+                                <option value="+82">Corea del Sur (+82)</option>
+                                <option value="+225">Costa de Marfil (+225)</option>
+                                <option value="+506">Costa Rica (+506)</option>
+                                <option value="+385">Croacia (+385)</option>
+                                <option value="+53">Cuba (+53)</option>
+                                <option value="+45">Dinamarca (+45)</option>
+                                <option value="+1-767">Dominica (+1-767)</option>
+                                <option value="+593">Ecuador (+593)</option>
+                                <option value="+20">Egipto (+20)</option>
+                                <option value="+503">El Salvador (+503)</option>
+                                <option value="+971">Emiratos Árabes Unidos (+971)</option>
+                                <option value="+291">Eritrea (+291)</option>
+                                <option value="+421">Eslovaquia (+421)</option>
+                                <option value="+386">Eslovenia (+386)</option>
+                                <option value="+34">España (+34)</option>
+                                <option value="+1">Estados Unidos (+1)</option>
+                                <option value="+372">Estonia (+372)</option>
+                                <option value="+268">Esuatini (+268)</option>
+                                <option value="+251">Etiopía (+251)</option>
+                                <option value="+63">Filipinas (+63)</option>
+                                <option value="+358">Finlandia (+358)</option>
+                                <option value="+679">Fiyi (+679)</option>
+                                <option value="+33">Francia (+33)</option>
+                                <option value="+241">Gabón (+241)</option>
+                                <option value="+220">Gambia (+220)</option>
+                                <option value="+995">Georgia (+995)</option>
+                                <option value="+233">Ghana (+233)</option>
+                                <option value="+1-473">Granada (+1-473)</option>
+                                <option value="+30">Grecia (+30)</option>
+                                <option value="+502">Guatemala (+502)</option>
+                                <option value="+224">Guinea (+224)</option>
+                                <option value="+245">Guinea-Bisáu (+245)</option>
+                                <option value="+240">Guinea Ecuatorial (+240)</option>
+                                <option value="+592">Guyana (+592)</option>
+                                <option value="+509">Haití (+509)</option>
+                                <option value="+504">Honduras (+504)</option>
+                                <option value="+36">Hungría (+36)</option>
+                                <option value="+91">India (+91)</option>
+                                <option value="+62">Indonesia (+62)</option>
+                                <option value="+964">Irak (+964)</option>
+                                <option value="+98">Irán (+98)</option>
+                                <option value="+353">Irlanda (+353)</option>
+                                <option value="+354">Islandia (+354)</option>
+                                <option value="+692">Islas Marshall (+692)</option>
+                                <option value="+677">Islas Salomón (+677)</option>
+                                <option value="+972">Israel (+972)</option>
+                                <option value="+39">Italia (+39)</option>
+                                <option value="+1-876">Jamaica (+1-876)</option>
+                                <option value="+81">Japón (+81)</option>
+                                <option value="+962">Jordania (+962)</option>
+                                <option value="+7">Kazajistán (+7)</option>
+                                <option value="+254">Kenia (+254)</option>
+                                <option value="+996">Kirguistán (+996)</option>
+                                <option value="+686">Kiribati (+686)</option>
+                                <option value="+965">Kuwait (+965)</option>
+                                <option value="+856">Laos (+856)</option>
+                                <option value="+266">Lesoto (+266)</option>
+                                <option value="+371">Letonia (+371)</option>
+                                <option value="+961">Líbano (+961)</option>
+                                <option value="+231">Liberia (+231)</option>
+                                <option value="+218">Libia (+218)</option>
+                                <option value="+423">Liechtenstein (+423)</option>
+                                <option value="+370">Lituania (+370)</option>
+                                <option value="+352">Luxemburgo (+352)</option>
+                                <option value="+389">Macedonia del Norte (+389)</option>
+                                <option value="+261">Madagascar (+261)</option>
+                                <option value="+60">Malasia (+60)</option>
+                                <option value="+265">Malaui (+265)</option>
+                                <option value="+960">Maldivas (+960)</option>
+                                <option value="+223">Malí (+223)</option>
+                                <option value="+356">Malta (+356)</option>
+                                <option value="+212">Marruecos (+212)</option>
+                                <option value="+230">Mauricio (+230)</option>
+                                <option value="+222">Mauritania (+222)</option>
+                                <option value="+52">México (+52)</option>
+                                <option value="+691">Micronesia (+691)</option>
+                                <option value="+373">Moldavia (+373)</option>
+                                <option value="+377">Mónaco (+377)</option>
+                                <option value="+976">Mongolia (+976)</option>
+                                <option value="+382">Montenegro (+382)</option>
+                                <option value="+258">Mozambique (+258)</option>
+                                <option value="+264">Namibia (+264)</option>
+                                <option value="+674">Nauru (+674)</option>
+                                <option value="+977">Nepal (+977)</option>
+                                <option value="+505">Nicaragua (+505)</option>
+                                <option value="+227">Níger (+227)</option>
+                                <option value="+234">Nigeria (+234)</option>
+                                <option value="+47">Noruega (+47)</option>
+                                <option value="+64">Nueva Zelanda (+64)</option>
+                                <option value="+968">Omán (+968)</option>
+                                <option value="+31">Países Bajos (+31)</option>
+                                <option value="+92">Pakistán (+92)</option>
+                                <option value="+680">Palaos (+680)</option>
+                                <option value="+970">Palestina (+970)</option>
+                                <option value="+507">Panamá (+507)</option>
+                                <option value="+675">Papúa Nueva Guinea (+675)</option>
+                                <option value="+595">Paraguay (+595)</option>
+                                <option value="+51">Perú (+51)</option>
+                                <option value="+48">Polonia (+48)</option>
+                                <option value="+351">Portugal (+351)</option>
+                                <option value="+44">Reino Unido (+44)</option>
+                                <option value="+236">República Centroafricana (+236)</option>
+                                <option value="+420">República Checa (+420)</option>
+                                <option value="+242">República del Congo (+242)</option>
+                                <option value="+243">República Democrática del Congo (+243)</option>
+                                <option value="+1-809">República Dominicana (+1-809)</option>
+                                <option value="+250">Ruanda (+250)</option>
+                                <option value="+40">Rumania (+40)</option>
+                                <option value="+7">Rusia (+7)</option>
+                                <option value="+685">Samoa (+685)</option>
+                                <option value="+1-869">San Cristóbal y Nieves (+1-869)</option>
+                                <option value="+378">San Marino (+378)</option>
+                                <option value="+1-784">San Vicente y las Granadinas (+1-784)</option>
+                                <option value="+1-758">Santa Lucía (+1-758)</option>
+                                <option value="+239">Santo Tomé y Príncipe (+239)</option>
+                                <option value="+221">Senegal (+221)</option>
+                                <option value="+381">Serbia (+381)</option>
+                                <option value="+248">Seychelles (+248)</option>
+                                <option value="+232">Sierra Leona (+232)</option>
+                                <option value="+65">Singapur (+65)</option>
+                                <option value="+963">Siria (+963)</option>
+                                <option value="+252">Somalia (+252)</option>
+                                <option value="+94">Sri Lanka (+94)</option>
+                                <option value="+27">Sudáfrica (+27)</option>
+                                <option value="+249">Sudán (+249)</option>
+                                <option value="+211">Sudán del Sur (+211)</option>
+                                <option value="+46">Suecia (+46)</option>
+                                <option value="+41">Suiza (+41)</option>
+                                <option value="+597">Surinam (+597)</option>
+                                <option value="+66">Tailandia (+66)</option>
+                                <option value="+255">Tanzania (+255)</option>
+                                <option value="+992">Tayikistán (+992)</option>
+                                <option value="+670">Timor Oriental (+670)</option>
+                                <option value="+228">Togo (+228)</option>
+                                <option value="+676">Tonga (+676)</option>
+                                <option value="+1-868">Trinidad y Tobago (+1-868)</option>
+                                <option value="+216">Túnez (+216)</option>
+                                <option value="+993">Turkmenistán (+993)</option>
+                                <option value="+90">Turquía (+90)</option>
+                                <option value="+688">Tuvalu (+688)</option>
+                                <option value="+380">Ucrania (+380)</option>
+                                <option value="+256">Uganda (+256)</option>
+                                <option value="+598">Uruguay (+598)</option>
+                                <option value="+998">Uzbekistán (+998)</option>
+                                <option value="+678">Vanuatu (+678)</option>
+                                <option value="+379">Vaticano (+379)</option>
+                                <option value="+58">Venezuela (+58)</option>
+                                <option value="+84">Vietnam (+84)</option>
+                                <option value="+967">Yemen (+967)</option>
+                                <option value="+253">Yibuti (+253)</option>
+                                <option value="+260">Zambia (+260)</option>
+                                <option value="+263">Zimbabue (+263)</option>
+                            </select>
+                            <input type="tel" id="celular" placeholder="Número de celular (mínimo 8 dígitos)" maxlength="15">
+                        </div>
+
                         <div id="msgCelular" class="campo-msg oculto"></div>
                     </div>
 
