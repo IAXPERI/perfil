@@ -382,22 +382,164 @@ form.addEventListener('submit', (e) => {
     const okSemestre = validarSemestre(true);
     const okCelular = validarCelular(true);
 
+    alertaBox.textContent = '';
+
     if (okNombre && okFecha && okCarrera && okSemestre && okCelular) {
         const paisSeleccionado = codigoPais ? codigoPais.options[codigoPais.selectedIndex].text : '';
-        alertaBox.innerHTML = `
-            <div class="campo-msg msg-exito" style="padding: 12px; font-size: 0.95rem;">
-                🎉 <strong>¡Solicitud de Contratación enviada con éxito!</strong><br>
-                <strong>Contratante:</strong> ${nombreInput.value.trim()} |
-                <strong>Fecha Inicio:</strong> ${diaInput.value}/${mesInput.value}/${anioInput.value} |
-                <strong>Carrera/Puesto:</strong> ${carreraInput.value.trim()} (${semestreInput.value}) |
-                <strong>Celular:</strong> ${paisSeleccionado} ${celularInput.value.trim()}
-            </div>
-        `;
+        const box = document.createElement('div');
+        box.className = 'campo-msg msg-exito';
+        box.style.padding = '12px';
+        box.style.fontSize = '0.95rem';
+
+        const titulo = document.createElement('strong');
+        titulo.textContent = '🎉 ¡Solicitud de Contratación enviada con éxito!';
+        box.appendChild(titulo);
+        box.appendChild(document.createElement('br'));
+        box.appendChild(document.createTextNode(
+            `Contratante: ${nombreInput.value.trim()} | Fecha Inicio: ${diaInput.value}/${mesInput.value}/${anioInput.value} | Carrera/Puesto: ${carreraInput.value.trim()} (${semestreInput.value}) | Celular: ${paisSeleccionado} ${celularInput.value.trim()}`
+        ));
+        alertaBox.appendChild(box);
+        if (typeof logPersonal === 'function') {
+            logPersonal('FORM_SUBMIT', `Contratación enviada para ${nombreInput.value.trim()}`);
+        }
     } else {
-        alertaBox.innerHTML = `
-            <div class="campo-msg msg-error" style="padding: 12px; font-size: 0.95rem;">
-                ⚠️ Faltan datos o hay errores en el formulario. Revisa los campos marcados en rojo arriba.
-            </div>
-        `;
+        const box = document.createElement('div');
+        box.className = 'campo-msg msg-error';
+        box.style.padding = '12px';
+        box.style.fontSize = '0.95rem';
+        box.textContent = '⚠️ Faltan datos o hay errores en el formulario. Revisa los campos marcados en rojo arriba.';
+        alertaBox.appendChild(box);
     }
 });
+
+// ==============================================================================
+// MÓDULO UNIFICADO SEMANAS 1-3 (JQUERY + .off().on() + ANTI-XSS + MODAL 30s)
+// ==============================================================================
+const PERSONAL_CASCADA = {
+    web: [
+        { id: 'pwa', label: 'Arquitectura PWA Offline-First', rec: 'Service Worker + Cache Storage + Manifest JSON' },
+        { id: 'dom', label: 'Seguridad XSS & DOM', rec: 'Delegación .off().on() y sanitización estricta con .text()' }
+    ],
+    gaming: [
+        { id: 'moba', label: 'MOBA Competitivo (Mobile Legends)', rec: 'Estrategia de líneas, rotación y HUD cero-scroll' },
+        { id: 'shooter', label: 'FPS / Táctico', rec: 'Control de latencia y respuesta rápida' }
+    ],
+    musica: [
+        { id: 'rock', label: 'Rock / Alternativo', rec: 'Repertorio con búsqueda keyup en tiempo real' },
+        { id: 'pop', label: 'Pop / Electrónica', rec: 'Cola interactiva táctil >= 44px' }
+    ]
+};
+
+let pTimerId = null;
+let pSegundos = 30;
+
+function logPersonal(tipo, msg) {
+    const $log = $('#pLogOutput');
+    if (!$log.length) return;
+    const hora = new Date().toLocaleTimeString();
+    $log.prepend($('<div>').text(`[${hora}] ${tipo}: ${msg}`));
+}
+
+function mostrarToastPersonal(msg) {
+    const $t = $('#toastPersonal');
+    $t.text(msg).stop(true, true).slideDown(250).delay(2800).fadeOut(350);
+}
+
+if (typeof window.jQuery !== 'undefined') {
+    $(document).ready(function () {
+        // 1. Cascada 3 Capas
+        $('#pCascadaArea').off('change').on('change', function () {
+            const area = $(this).val();
+            const $sub = $('#pCascadaSub');
+            $sub.empty().append('<option value="">-- Selecciona Especialidad --</option>');
+            $('#pCascadaRes').addClass('oculto').text('');
+
+            if (area && PERSONAL_CASCADA[area]) {
+                PERSONAL_CASCADA[area].forEach(item => {
+                    $sub.append($('<option>').val(item.id).text(item.label).data('rec', item.rec));
+                });
+                $sub.prop('disabled', false);
+                logPersonal('CASCADA_1', `Área seleccionada: ${area}`);
+            } else {
+                $sub.prop('disabled', true);
+            }
+        });
+
+        $('#pCascadaSub').off('change').on('change', function () {
+            const rec = $(this).find(':selected').data('rec');
+            if (rec) {
+                $('#pCascadaRes').removeClass('oculto').text(`✅ Recomendación: ${rec}`);
+                logPersonal('CASCADA_2', rec);
+            }
+        });
+
+        // 2. Calculador 50 BOB/hr + Modal 30s
+        $('#pHoras').off('input').on('input', function () {
+            let hrs = parseInt($(this).val(), 10) || 1;
+            if (hrs < 1) { hrs = 1; $(this).val(1); }
+            $('#pTotalBob').text(hrs * 50);
+        });
+
+        $('#pBtnAbrirModal').off('click').on('click', function () {
+            $('#pModalMonto').text(`${$('#pTotalBob').text()} BOB`);
+            clearInterval(pTimerId);
+            pSegundos = 30;
+            $('#pTimerVisual').text('00:30s');
+            pTimerId = setInterval(() => {
+                pSegundos--;
+                $('#pTimerVisual').text(`00:${pSegundos < 10 ? '0' + pSegundos : pSegundos}s`);
+                if (pSegundos <= 0) {
+                    clearInterval(pTimerId);
+                    $('#modalPersonal30s').fadeOut(200);
+                    mostrarToastPersonal('⚠️ Tarifa Flash Expirada (30s).');
+                }
+            }, 1000);
+            $('#modalPersonal30s').fadeIn(200).css('display', 'flex');
+        });
+
+        $('#pBtnCerrarModal').off('click').on('click', function () {
+            clearInterval(pTimerId);
+            $('#modalPersonal30s').fadeOut(200);
+        });
+
+        $('#pBtnConfirmarModal').off('click').on('click', function () {
+            clearInterval(pTimerId);
+            $('#modalPersonal30s').fadeOut(200);
+            const monto = $('#pModalMonto').text();
+            mostrarToastPersonal(`✅ Cotización confirmada: ${monto}`);
+            logPersonal('COTIZACION', `Confirmada por ${monto}`);
+        });
+
+        // 3. Lista Táctil Anti-XSS (.text() + >= 44px + .off().on())
+        $('#pBtnAgregarItem').off('click').on('click', function () {
+            const txt = $('#pInputItem').val().trim();
+            if (!txt) return;
+            const $fila = $('<div>').addClass('fila-tactil');
+            const $span = $('<span>').addClass('titulo-truncado').text(txt);
+            const $btn = $('<button>').attr('type', 'button')
+                .addClass('btn-tactil btn-quitar-item')
+                .css({ background: '#fee2e2', color: '#dc2626' })
+                .text('✕');
+            $fila.append($span, $btn);
+            $('#pListaTactil').prepend($fila);
+            $('#pInputItem').val('');
+            logPersonal('LISTA_ANTI_XSS', txt);
+        });
+
+        $('#pBtnTestXss').off('click').on('click', function () {
+            $('#pInputItem').val("<script>alert('XSS')</script>");
+            $('#pBtnAgregarItem').trigger('click');
+        });
+
+        $('#pListaTactil').off('click', '.btn-quitar-item').on('click', '.btn-quitar-item', function () {
+            $(this).closest('.fila-tactil').fadeOut(200, function () { $(this).remove(); });
+        });
+
+        // 4. Doble clic en tarjetas de juegos/música (Semana 1 Día 1: dblclick)
+        $(document).off('dblclick', '.tarjeta-item').on('dblclick', '.tarjeta-item', function () {
+            const titulo = $(this).find('h3, h4').first().text().trim() || 'Elemento';
+            logPersonal('DBLCLICK_FAV', `❤️ Favorito marcado: ${titulo}`);
+            mostrarToastPersonal(`❤️ Favorito: ${titulo}`);
+        });
+    });
+}

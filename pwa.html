@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#f97316">
+  <title>Mi Perfil — PWA Game HUD Cero-Scroll</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="pwa.js" defer></script>
+</head>
+<body>
+  <div class="hud-app">
+    <!-- 1. TOP HUD (Estilo Game Lobby) -->
+    <header class="top-hud">
+      <div class="hud-profile">
+        <div class="hud-avatar">🎮</div>
+        <div class="hud-user-meta">
+          <div class="hud-user-row">
+            <strong id="hudPerfilNombre">Mi Perfil</strong>
+            <span class="hud-lvl">NV. 30</span>
+          </div>
+          <small>Diseño Web II • UPDS 2026</small>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <span class="hud-pill hud-gold" title="Puntos / Cotización">🪙 <span id="hudPuntos">2,983</span></span>
+        <span id="estadoRed" class="hud-pill hud-net">🟢 En Línea</span>
+        <a href="index.html" class="btn-pc-back" title="Volver a la Vista PC">💻 Vista PC</a>
+        <button type="button" id="pwaThemeBtn" class="btn-hud-icon" title="Cambiar Tema">🌙</button>
+      </div>
+    </header>
+
+    <!-- 2. VIEWPORT CENTRAL CERO-SCROLL -->
+    <main class="hud-viewport">
+
+      <!-- PESTAÑA 1: INICIO / LOBBY SHOWCASE -->
+      <section id="pane-inicio" class="hud-pane active">
+        <div class="lobby-grid">
+          <div class="lobby-left">
+            <button type="button" class="side-shortcut" data-go="pane-catalogo">
+              <span>🛍️</span>
+              <small>Catálogo</small>
+            </button>
+            <button type="button" class="side-shortcut" data-go="pane-cotizar">
+              <span>⚡</span>
+              <small>Cotizar</small>
+            </button>
+            <button type="button" class="side-shortcut" data-go="pane-seguridad">
+              <span>🛡️</span>
+              <small>Anti-XSS</small>
+            </button>
+          </div>
+
+          <div class="lobby-center-card">
+            <span class="badge-season">MI PERFIL • CERO-SCROLL</span>
+            <h2>"El éxito es la suma de pequeños esfuerzos repetidos día tras día."</h2>
+            <div class="about-compact">
+              <div><strong>🎮 Pasatiempos:</strong> Videojuegos, Series/Anime, Música, Redes.</div>
+              <div><strong>💻 Intereses:</strong> HTML, CSS, JavaScript, Hábitos, Deporte.</div>
+            </div>
+            <div class="lobby-stats-row">
+              <div class="stat-box"><small>Juegos</small><strong>9</strong></div>
+              <div class="stat-box"><small>Música</small><strong>22</strong></div>
+              <div class="stat-box"><small>Proyectos</small><strong>4</strong></div>
+            </div>
+            <div class="lobby-actions-row">
+              <button type="button" id="btnIrCatalogo" class="btn-hud-primary" style="flex:1;">🚀 Catálogo (35)</button>
+              <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQv_Za2WpkiAMMA-pn5YumT0LbBhuPd7JCl9rtfQpuyn095lwY_bxq2asX9krhcntFvoDAKFX39E_Mh/pubhtml" target="_blank" class="btn-hud-secondary" style="text-decoration:none; display:inline-flex; align-items:center;">📅 Horario</a>
+            </div>
+            <div class="social-mini-row">
+              <a href="https://instagram.com" target="_blank">IG</a>
+              <a href="https://tiktok.com" target="_blank">TK</a>
+              <a href="https://www.facebook.com/daniel.aliaga.3766" target="_blank">FB</a>
+            </div>
+          </div>
+
+          <div class="lobby-right">
+            <div class="mini-panel" id="contenedorMenu" data-hidratado="false">
+              <h4>⚡ Hidratación PWA</h4>
+              <p>Service Worker activo para uso sin internet.</p>
+              <button type="button" id="btnPWA" class="btn-hud-secondary">Hidratar SW</button>
+            </div>
+            <div class="mini-panel">
+              <h4>🎯 Acceso Rápido</h4>
+              <p>Doble clic en cualquier tarjeta del catálogo para marcar favorito.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PESTAÑA 2: CATÁLOGO ASÍNCRONO (SINCRONIZADO CON INDEX.HTML) + CASCADA -->
+      <section id="pane-catalogo" class="hud-pane">
+        <div class="pane-header">
+          <h3>📦 Catálogo Personal (Juegos, Música y Proyectos)</h3>
+          <input type="text" id="pwaBuscar" class="hud-input" placeholder="🔍 Buscar Tekken 8, The Strokes, BancoBNB...">
+          <div class="hud-filter-row" id="pwaFilterBar">
+            <button type="button" class="hud-filter-btn active" data-cat="todos">🌐 Todos</button>
+            <button type="button" class="hud-filter-btn" data-cat="juego">🎮 Juegos</button>
+            <button type="button" class="hud-filter-btn" data-cat="musica">🎵 Música</button>
+            <button type="button" class="hud-filter-btn" data-cat="proyecto">💻 Proyectos</button>
+          </div>
+        </div>
+
+        <div class="cascada-bar">
+          <select id="pwaCascadaArea" class="hud-select">
+            <option value="">1. Área</option>
+            <option value="web">Desarrollo Web</option>
+            <option value="gaming">Gaming</option>
+            <option value="musica">Música</option>
+          </select>
+          <select id="pwaCascadaSub" class="hud-select" disabled>
+            <option value="">2. Especialidad</option>
+          </select>
+          <span id="pwaCascadaRes" class="cascada-badge" style="display:none;"></span>
+        </div>
+
+        <div id="pwaCatalogGrid" class="catalog-cards-grid"></div>
+
+        <div class="paginacion-hud">
+          <button type="button" id="btnPrevPag" class="btn-tactil-hud">◀</button>
+          <span id="infoPag" class="pag-info">1 / 1</span>
+          <button type="button" id="btnNextPag" class="btn-tactil-hud">▶</button>
+        </div>
+      </section>
+
+      <!-- PESTAÑA 3: COTIZADOR FLASH 30s -->
+      <section id="pane-cotizar" class="hud-pane">
+        <div class="center-panel">
+          <h3>💰 Cotizador Flash (30 Segundos)</h3>
+          <p class="muted-txt">Servicio seleccionado: <strong id="pwaServicioNombre">BancoBNB — Proyecto Web</strong> (<span id="pwaServicioPrecio">180</span> BOB/hr)</p>
+          <div class="qty-row">
+            <button type="button" id="pwaRestarHr" class="btn-tactil-hud">-</button>
+            <span id="pwaHorasDisplay" class="qty-val">1</span>
+            <button type="button" id="pwaSumarHr" class="btn-tactil-hud">+</button>
+          </div>
+          <div class="total-hud">Total: <span id="pwaTotalBob">180</span> BOB</div>
+          <button type="button" id="pwaAbrirModal30s" class="btn-hud-primary">⏱️ Bloquear Tarifa 30s</button>
+        </div>
+      </section>
+
+      <!-- PESTAÑA 4: LISTA TÁCTIL ANTI-XSS -->
+      <section id="pane-seguridad" class="hud-pane">
+        <div class="center-panel">
+          <h3>🛡️ Cola Táctil Segura (Anti-XSS)</h3>
+          <form id="pwaFormSeguro" class="xss-form-row">
+            <input type="text" id="pwaInputSeguro" class="hud-input" placeholder="Escribe tarea, canción o <script>..." required>
+            <button type="submit" class="btn-tactil-hud btn-accent">+</button>
+            <button type="button" id="pwaBtnTestXss" class="btn-tactil-hud btn-danger">XSS</button>
+          </form>
+          <div id="pwaListaSegura" class="lista-segura-scroll">
+            <div class="fila-hud">
+              <span class="titulo-truncado">Tekken 8 &amp; Proyecto BancoBNB — Sincronizado</span>
+              <button type="button" class="btn-tactil-hud btn-quitar-hud">✕</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PESTAÑA 5: BITÁCORA EN VIVO -->
+      <section id="pane-bitacora" class="hud-pane">
+        <div class="center-panel">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
+            <h3>📡 Bitácora de Eventos JS</h3>
+            <button type="button" id="pwaLimpiarLog" class="btn-tactil-hud" style="padding:0 12px;">Limpiar</button>
+          </div>
+          <div id="pwaLogOutput" class="log-hud">
+            <div>[Sistema] PWA Game HUD lista.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 3. BOTTOM HUD (Barra Inferior Estilo Juego >= 44px) -->
+    <nav class="bottom-hud">
+      <button type="button" class="hud-tab active" data-target="pane-inicio">
+        <span>🏠</span><small>Inicio</small>
+      </button>
+      <button type="button" class="hud-tab" data-target="pane-catalogo">
+        <span>📦</span><small>Catálogo</small>
+      </button>
+      <button type="button" class="hud-tab" data-target="pane-cotizar">
+        <span>💰</span><small>Cotizar</small>
+      </button>
+      <button type="button" class="hud-tab" data-target="pane-seguridad">
+        <span>🛡️</span><small>Anti-XSS</small>
+      </button>
+      <button type="button" class="hud-tab hud-tab-cta" data-target="pane-bitacora">
+        <span>📡</span><small>Bitácora</small>
+      </button>
+    </nav>
+  </div>
+
+  <!-- MODAL 30 SEGUNDOS -->
+  <div id="pwaModal30s" class="hud-modal-overlay">
+    <div class="hud-modal-box">
+      <h3>⏱️ Tarifa Flash</h3>
+      <div id="pwaTimerVisual" class="hud-timer">00:30s</div>
+      <p><strong id="pwaModalServicio">PWA Offline-First HUD</strong></p>
+      <p>Total: <strong id="pwaModalTotal" style="color:#f97316;">180 BOB</strong></p>
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button type="button" id="pwaConfirmar30s" class="btn-hud-primary" style="flex:1;">✅ Confirmar</button>
+        <button type="button" id="pwaCancelar30s" class="btn-hud-secondary" style="flex:1;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="pwaToast" class="hud-toast"></div>
+</body>
+</html>
+
