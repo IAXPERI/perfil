@@ -1,4 +1,4 @@
-const CACHE_NAME = 'personal-pwa-hud-v3';
+const CACHE_NAME = 'personal-pwa-hud-v5';
 const ASSETS_TO_CACHE = [
   './',
   'pwa.html',

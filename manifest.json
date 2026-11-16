@@ -1,12 +1,12 @@
 {
-  "name": "Mi Perfil Personal - PWA Game HUD",
+  "name": "Mi Perfil Personal - PWA Cero-Scroll",
   "short_name": "MiPerfilPWA",
   "description": "Aplicación Progresiva Personal Cero-Scroll (Diseño Web II - UPDS 2026)",
   "start_url": "pwa.html",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#090d1e",
-  "theme_color": "#f97316",
+  "background_color": "#f8fafc",
+  "theme_color": "#0b2545",
   "icons": [
     {
       "src": "icons/icon-192.png",

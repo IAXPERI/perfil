@@ -1,20 +1,56 @@
-const HUD_STATE = {
+const FOTOS_CARRUSEL = [
+  { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMPj_L1mVYVkKip49tSHwVi4DBIsQZjWgfcrEpr_aHnA&s=10', titulo: 'Mi Mundo' },
+  { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKU6Y7RZfy6efY1t1mFFVnC5BmR6msFbdnlD_V6ieTsQ&s=10', titulo: 'Pasatiempos' },
+  { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl84LKEyfvn9ktFBhe55hoHl2sNnfKYijzzbIIyJF0sQ&s=10', titulo: 'Banda Favorita' }
+];
+
+const FALLBACK_PERSONAL = [
+  { id: 'JUE-01', titulo: 'Tekken 8', categoria: 'juego', detalle: 'Juego Favorito • Lucha / Pelea', portada: 'icons/icon-192.png' },
+  { id: 'JUE-02', titulo: 'Sifu', categoria: 'juego', detalle: 'Juego Favorito • Artes Marciales', portada: 'icons/icon-192.png' },
+  { id: 'JUE-03', titulo: 'Apex Legends', categoria: 'juego', detalle: 'Juego Favorito • Battle Royale', portada: 'icons/icon-192.png' },
+  { id: 'JUE-04', titulo: 'Overwatch 2', categoria: 'juego', detalle: 'Juego Favorito • Hero Shooter', portada: 'icons/icon-192.png' },
+  { id: 'JUE-05', titulo: 'Battlefield 1', categoria: 'juego', detalle: 'Juego Favorito • Shooter Bélico', portada: 'icons/icon-192.png' },
+  { id: 'JUE-06', titulo: 'ARK: Survival Evolved', categoria: 'juego', detalle: 'Juego Favorito • Supervivencia', portada: 'icons/icon-192.png' },
+  { id: 'JUE-07', titulo: "Assassin's Creed Valhalla", categoria: 'juego', detalle: 'Juego Favorito • Mundo Abierto', portada: 'icons/icon-192.png' },
+  { id: 'JUE-08', titulo: "Assassin's Creed Origins", categoria: 'juego', detalle: 'Juego Favorito • Antiguo Egipto', portada: 'icons/icon-192.png' },
+  { id: 'JUE-09', titulo: 'Grand Theft Auto V (GTA V)', categoria: 'juego', detalle: 'Juego Favorito • Mundo Abierto', portada: 'icons/icon-192.png' },
+  { id: 'MUS-01', titulo: 'Reptilia — The Strokes', categoria: 'musica', detalle: 'Música • Indie Rock', portada: 'icons/icon-192.png' },
+  { id: 'MUS-02', titulo: 'Machu Picchu — The Strokes', categoria: 'musica', detalle: 'Música • Indie Rock', portada: 'icons/icon-192.png' },
+  { id: 'MUS-03', titulo: 'Someday — The Strokes', categoria: 'musica', detalle: 'Música • Indie Rock', portada: 'icons/icon-192.png' },
+  { id: 'MUS-04', titulo: 'Take Me Out — Franz Ferdinand', categoria: 'musica', detalle: 'Música • Indie Rock', portada: 'icons/icon-192.png' },
+  { id: 'MUS-05', titulo: 'Looking Out for You — Joy Again', categoria: 'musica', detalle: 'Música • Indie Pop', portada: 'icons/icon-192.png' },
+  { id: 'MUS-06', titulo: 'Loser — Tame Impala', categoria: 'musica', detalle: 'Música • Psicodélico', portada: 'icons/icon-192.png' },
+  { id: 'MUS-07', titulo: "I Don't Love You — My Chemical Romance", categoria: 'musica', detalle: 'Música • Rock Alternativo', portada: 'icons/icon-192.png' },
+  { id: 'MUS-08', titulo: 'Famous Last Words — My Chemical Romance', categoria: 'musica', detalle: 'Música • Rock Alternativo', portada: 'icons/icon-192.png' },
+  { id: 'MUS-09', titulo: 'Sleep — My Chemical Romance', categoria: 'musica', detalle: 'Música • Rock Alternativo', portada: 'icons/icon-192.png' },
+  { id: 'MUS-10', titulo: 'Jesus of Suburbia — Green Day', categoria: 'musica', detalle: 'Música • Punk Rock', portada: 'icons/icon-192.png' },
+  { id: 'MUS-11', titulo: 'The Rock Show — blink-182', categoria: 'musica', detalle: 'Música • Pop Punk', portada: 'icons/icon-192.png' },
+  { id: 'MUS-12', titulo: 'Nightmare — Avenged Sevenfold', categoria: 'musica', detalle: 'Música • Heavy Metal', portada: 'icons/icon-192.png' },
+  { id: 'MUS-13', titulo: 'Bat Country — Avenged Sevenfold', categoria: 'musica', detalle: 'Música • Heavy Metal', portada: 'icons/icon-192.png' },
+  { id: 'MUS-14', titulo: 'Dawn of Victory — Rhapsody', categoria: 'musica', detalle: 'Música • Power Metal', portada: 'icons/icon-192.png' },
+  { id: 'MUS-15', titulo: 'La Leyenda del Hada y el Mago — Rata Blanca', categoria: 'musica', detalle: 'Música • Rock en Español', portada: 'icons/icon-192.png' },
+  { id: 'MUS-16', titulo: 'Joseph — Falling In Reverse', categoria: 'musica', detalle: 'Música • Post-Hardcore', portada: 'icons/icon-192.png' },
+  { id: 'MUS-17', titulo: 'Knights of Cydonia — Muse', categoria: 'musica', detalle: 'Música • Rock Progresivo', portada: 'icons/icon-192.png' },
+  { id: 'MUS-18', titulo: 'Reapers — Muse', categoria: 'musica', detalle: 'Música • Rock Progresivo', portada: 'icons/icon-192.png' },
+  { id: 'MUS-19', titulo: 'Aizo — King Gnu', categoria: 'musica', detalle: 'Música • J-Rock', portada: 'icons/icon-192.png' },
+  { id: 'MUS-20', titulo: 'Fun, Fun, Fun — Pharrell Williams', categoria: 'musica', detalle: 'Música • Pop / Funk', portada: 'icons/icon-192.png' },
+  { id: 'MUS-21', titulo: 'Zero — Imagine Dragons', categoria: 'musica', detalle: 'Música • Pop Rock', portada: 'icons/icon-192.png' },
+  { id: 'MUS-22', titulo: 'Doma — Jósean Log', categoria: 'musica', detalle: 'Música • Indie Folk', portada: 'icons/icon-192.png' }
+];
+
+const PWA_STATE = {
+  fotoIdx: 0,
   catalogo: [],
   categoria: 'todos',
   busqueda: '',
   pagina: 1,
   porPagina: 4,
-  servicio: { nombre: 'BancoBNB — Proyecto Web', precio: 180 },
   horas: 1,
   timer: null,
   segundos: 30
 };
 
-const HUD_CASCADA = {
-  web: [
-    { id: 'bnb', label: 'BancoBNB & InscripcionesUniversidad', rec: 'Arquitectura Web + PWA Offline-First' },
-    { id: 'med', label: 'GestionMedica & BusquedaTrabajo', rec: 'Formularios validados + Blindaje Anti-XSS' }
-  ],
+const PWA_CASCADA = {
   gaming: [
     { id: 'lucha', label: 'Tekken 8 & Sifu', rec: 'Combos, reflejos y acción cuerpo a cuerpo' },
     { id: 'shooter', label: 'Apex Legends, Overwatch 2 & BF1', rec: 'Shooters competitivos y trabajo en equipo' }
@@ -31,7 +67,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-function actualizarRedHud() {
+function actualizarRed() {
   const $net = $('#estadoRed');
   if (navigator.onLine) {
     $net.text('🟢 En Línea').removeClass('offline');
@@ -40,130 +76,133 @@ function actualizarRedHud() {
   }
 }
 
-function logHud(tipo, msg) {
+function logPwa(tipo, msg) {
   const hora = new Date().toLocaleTimeString();
   $('#pwaLogOutput').prepend($('<div>').text(`[${hora}] ${tipo}: ${msg}`));
 }
 
-function toastHud(msg) {
-  $('#pwaToast').text(msg).stop(true, true).slideDown(200).delay(2500).fadeOut(300);
+function toastPwa(msg, color) {
+  $('#pwaToast')
+    .css('border-left-color', color || '#f97316')
+    .text(msg)
+    .stop(true, true)
+    .slideDown(200)
+    .delay(2500)
+    .fadeOut(300);
 }
 
-function cambiarPaneHud(target) {
-  $('.hud-pane').removeClass('active');
+function cambiarPane(target) {
+  $('.pwa-pane').removeClass('active');
   $(`#${target}`).addClass('active');
-  $('.hud-tab').removeClass('active');
-  $(`.hud-tab[data-target="${target}"]`).addClass('active');
+  $('.nav-tab').removeClass('active');
+  $(`.nav-tab[data-target="${target}"]`).addClass('active');
 }
 
 function cargarPersonalJson() {
   fetch('data/personal.json')
     .then(r => { if (!r.ok) throw new Error(); return r.json(); })
     .then(data => {
-      HUD_STATE.catalogo = data;
-      renderCatalogoHud();
-      logHud('FETCH_JSON', `${data.length} ítems cargados`);
+      const soloJuegosMusica = data.filter(x => x.categoria === 'juego' || x.categoria === 'musica');
+      PWA_STATE.catalogo = soloJuegosMusica.length ? soloJuegosMusica : FALLBACK_PERSONAL;
+      renderCatalogo();
+      logPwa('FETCH_JSON', `${PWA_STATE.catalogo.length} juegos y canciones cargados`);
     })
     .catch(() => {
-      HUD_STATE.catalogo = [
-        { id: 'PRJ-01', titulo: 'BancoBNB', categoria: 'proyecto', detalle: 'Proyecto Web • Sistema Bancario', precio: 180, portada: 'icons/icon-192.png' },
-        { id: 'JUE-01', titulo: 'Tekken 8', categoria: 'juego', detalle: 'Juego Favorito • Lucha / Pelea', precio: 50, portada: 'icons/icon-192.png' },
-        { id: 'MUS-01', titulo: 'Reptilia — The Strokes', categoria: 'musica', detalle: 'Música Favorita • Indie Rock', precio: 25, portada: 'icons/icon-192.png' }
-      ];
-      renderCatalogoHud();
+      PWA_STATE.catalogo = FALLBACK_PERSONAL;
+      renderCatalogo();
     });
 }
 
-function renderCatalogoHud() {
+function renderCatalogo() {
   const $grid = $('#pwaCatalogGrid').empty();
-  const q = HUD_STATE.busqueda.toLowerCase();
-  const cat = HUD_STATE.categoria;
-  const filtrados = HUD_STATE.catalogo.filter(i => {
+  const q = PWA_STATE.busqueda.toLowerCase();
+  const cat = PWA_STATE.categoria;
+
+  const filtrados = PWA_STATE.catalogo.filter(i => {
     const okCat = cat === 'todos' || i.categoria === cat;
     const okTxt = !q || `${i.titulo} ${i.categoria} ${i.detalle}`.toLowerCase().includes(q);
     return okCat && okTxt;
   });
 
-  const totalPaginas = Math.max(1, Math.ceil(filtrados.length / HUD_STATE.porPagina));
-  if (HUD_STATE.pagina > totalPaginas) HUD_STATE.pagina = totalPaginas;
-  const inicio = (HUD_STATE.pagina - 1) * HUD_STATE.porPagina;
-  const items = filtrados.slice(inicio, inicio + HUD_STATE.porPagina);
+  const totalPaginas = Math.max(1, Math.ceil(filtrados.length / PWA_STATE.porPagina));
+  if (PWA_STATE.pagina > totalPaginas) PWA_STATE.pagina = totalPaginas;
+  const inicio = (PWA_STATE.pagina - 1) * PWA_STATE.porPagina;
+  const items = filtrados.slice(inicio, inicio + PWA_STATE.porPagina);
 
-  $('#infoPag').text(`${HUD_STATE.pagina} / ${totalPaginas}`);
-  $('#btnPrevPag').prop('disabled', HUD_STATE.pagina <= 1);
-  $('#btnNextPag').prop('disabled', HUD_STATE.pagina >= totalPaginas);
+  $('#infoPag').text(`${PWA_STATE.pagina} / ${totalPaginas}`);
+  $('#btnPrevPag').prop('disabled', PWA_STATE.pagina <= 1);
+  $('#btnNextPag').prop('disabled', PWA_STATE.pagina >= totalPaginas);
 
   items.forEach(item => {
-    const $card = $('<div>').addClass('hud-item-card').data({ nombre: item.titulo, precio: item.precio });
-    const $top = $('<div>').addClass('hud-item-top').append(
-      $('<img>').attr({ src: item.portada, alt: item.titulo, width: 40, height: 40, loading: 'lazy' }),
-      $('<div>').addClass('hud-item-info').append(
+    const $card = $('<div>').addClass('item-card-pwa').data('nombre', item.titulo);
+    const $top = $('<div>').addClass('item-top').append(
+      $('<img>').attr({ src: item.portada || 'icons/icon-192.png', alt: item.titulo, width: 38, height: 38, loading: 'lazy' }),
+      $('<div>').addClass('item-info').append(
         $('<h5>').text(item.titulo),
         $('<small>').text(item.detalle)
       )
     );
-    const $btn = $('<button>').attr('type', 'button').addClass('btn-hud-primary btn-cotizar-hud')
-      .text(`⚡ ${item.precio} BOB`);
+    const $btn = $('<button>').attr('type', 'button').addClass('btn-blue-pwa btn-fav-item').text('❤️ Favorito');
     $card.append($top, $btn);
     $grid.append($card);
   });
 }
 
 $(document).ready(function () {
-  actualizarRedHud();
-  $(window).off('online offline').on('online offline', actualizarRedHud);
+  actualizarRed();
+  $(window).off('online offline').on('online offline', actualizarRed);
   cargarPersonalJson();
 
-  $('.hud-tab, .side-shortcut').off('click').on('click', function () {
-    const target = $(this).data('target') || $(this).data('go');
-    if (target) cambiarPaneHud(target);
+  $('.nav-tab').off('click').on('click', function () {
+    cambiarPane($(this).data('target'));
   });
-
-  $('#btnIrCatalogo').off('click').on('click', () => cambiarPaneHud('pane-catalogo'));
 
   $('#pwaThemeBtn').off('click').on('click', function () {
-    $('body').toggleClass('light-mode');
-    $(this).text($('body').hasClass('light-mode') ? '☀️' : '🌙');
+    $('body').toggleClass('dark-mode');
+    $(this).text($('body').hasClass('dark-mode') ? '☀️ Claro' : '🌙 Modo');
   });
 
-  $('#btnPWA').off('click').on('click', function () {
-    $('#contenedorMenu').attr('data-hidratado', 'true');
-    $(this).text('✓ Hidratado');
-    toastHud('⚡ Service Worker hidratado');
-    logHud('HYDRATION', 'Interfaz PWA hidratada');
-  });
+  // Mini carrusel de Mi Mundo
+  function mostrarFoto(idx) {
+    PWA_STATE.fotoIdx = (idx + FOTOS_CARRUSEL.length) % FOTOS_CARRUSEL.length;
+    const f = FOTOS_CARRUSEL[PWA_STATE.fotoIdx];
+    $('#pwaCarouselImg').attr('src', f.src);
+    $('#pwaCarouselTitle').text(f.titulo);
+  }
+  $('#btnPrevFoto').off('click').on('click', () => mostrarFoto(PWA_STATE.fotoIdx - 1));
+  $('#btnNextFoto').off('click').on('click', () => mostrarFoto(PWA_STATE.fotoIdx + 1));
 
   $('#pwaBuscar').off('keyup').on('keyup', function () {
-    HUD_STATE.busqueda = $(this).val().trim();
-    HUD_STATE.pagina = 1;
-    renderCatalogoHud();
-    logHud('KEYUP', `Búsqueda: "${HUD_STATE.busqueda}"`);
+    PWA_STATE.busqueda = $(this).val().trim();
+    PWA_STATE.pagina = 1;
+    renderCatalogo();
+    logPwa('KEYUP', `Búsqueda: "${PWA_STATE.busqueda}"`);
   });
 
-  $('#pwaFilterBar').off('click', '.hud-filter-btn').on('click', '.hud-filter-btn', function () {
-    $('.hud-filter-btn').removeClass('active');
+  $('#pwaFilterBar').off('click', '.pill-btn').on('click', '.pill-btn', function () {
+    $('.pill-btn').removeClass('active');
     $(this).addClass('active');
-    HUD_STATE.categoria = $(this).data('cat');
-    HUD_STATE.pagina = 1;
-    renderCatalogoHud();
-    logHud('FILTRO', `Categoría: ${HUD_STATE.categoria}`);
+    PWA_STATE.categoria = $(this).data('cat');
+    PWA_STATE.pagina = 1;
+    renderCatalogo();
+    logPwa('FILTRO', PWA_STATE.categoria);
   });
 
   $('#btnPrevPag').off('click').on('click', () => {
-    if (HUD_STATE.pagina > 1) { HUD_STATE.pagina--; renderCatalogoHud(); }
+    if (PWA_STATE.pagina > 1) { PWA_STATE.pagina--; renderCatalogo(); }
   });
 
   $('#btnNextPag').off('click').on('click', () => {
-    HUD_STATE.pagina++;
-    renderCatalogoHud();
+    PWA_STATE.pagina++;
+    renderCatalogo();
   });
 
   $('#pwaCascadaArea').off('change').on('change', function () {
     const area = $(this).val();
-    const $sub = $('#pwaCascadaSub').empty().append('<option value="">2. Especialidad</option>');
+    const $sub = $('#pwaCascadaSub').empty().append('<option value="">Especialidad</option>');
     $('#pwaCascadaRes').hide();
-    if (area && HUD_CASCADA[area]) {
-      HUD_CASCADA[area].forEach(x => $sub.append($('<option>').val(x.id).text(x.label).data('rec', x.rec)));
+    if (area && PWA_CASCADA[area]) {
+      PWA_CASCADA[area].forEach(x => $sub.append($('<option>').val(x.id).text(x.label).data('rec', x.rec)));
       $sub.prop('disabled', false);
     } else {
       $sub.prop('disabled', true);
@@ -174,82 +213,92 @@ $(document).ready(function () {
     const rec = $(this).find(':selected').data('rec');
     if (rec) {
       $('#pwaCascadaRes').text(`✅ ${rec}`).fadeIn();
-      logHud('CASCADA', rec);
+      logPwa('CASCADA', rec);
     }
   });
 
-  $('#pwaCatalogGrid').off('click', '.btn-cotizar-hud').on('click', '.btn-cotizar-hud', function () {
-    const $c = $(this).closest('.hud-item-card');
-    HUD_STATE.servicio = { nombre: $c.data('nombre'), precio: $c.data('precio') };
-    HUD_STATE.horas = 1;
-    $('#pwaServicioNombre').text(HUD_STATE.servicio.nombre);
-    $('#pwaServicioPrecio').text(HUD_STATE.servicio.precio);
-    $('#pwaHorasDisplay').text(1);
-    $('#pwaTotalBob').text(HUD_STATE.servicio.precio);
-    cambiarPaneHud('pane-cotizar');
+  $('#pwaCatalogGrid').off('click', '.btn-fav-item').on('click', '.btn-fav-item', function () {
+    const nom = $(this).closest('.item-card-pwa').data('nombre');
+    toastPwa(`❤️ Favorito: ${nom}`);
+    logPwa('FAVORITO', nom);
   });
 
-  $('#pwaCatalogGrid').off('dblclick', '.hud-item-card').on('dblclick', '.hud-item-card', function () {
+  $('#pwaCatalogGrid').off('dblclick', '.item-card-pwa').on('dblclick', '.item-card-pwa', function () {
     const nom = $(this).data('nombre');
-    toastHud(`❤️ Favorito: ${nom}`);
-    logHud('DBLCLICK', nom);
+    toastPwa(`❤️ Doble clic: ${nom}`);
+    logPwa('DBLCLICK', nom);
   });
 
   $('#pwaSumarHr').off('click').on('click', () => {
-    HUD_STATE.horas++;
-    $('#pwaHorasDisplay').text(HUD_STATE.horas);
-    $('#pwaTotalBob').text(HUD_STATE.horas * HUD_STATE.servicio.precio);
+    PWA_STATE.horas++;
+    $('#pwaHorasDisplay').text(PWA_STATE.horas);
+    $('#pwaTotalBob').text(PWA_STATE.horas * 50);
   });
 
   $('#pwaRestarHr').off('click').on('click', () => {
-    if (HUD_STATE.horas > 1) {
-      HUD_STATE.horas--;
-      $('#pwaHorasDisplay').text(HUD_STATE.horas);
-      $('#pwaTotalBob').text(HUD_STATE.horas * HUD_STATE.servicio.precio);
+    if (PWA_STATE.horas > 1) {
+      PWA_STATE.horas--;
+      $('#pwaHorasDisplay').text(PWA_STATE.horas);
+      $('#pwaTotalBob').text(PWA_STATE.horas * 50);
     }
   });
 
+  $('#pwaEnviarContratacion').off('click').on('click', () => {
+    const nom = $('#pwaNombreCont').val().trim();
+    const cel = $('#pwaCelCont').val().trim();
+    const puesto = $('#pwaCarreraCont').val().trim();
+
+    if (nom.length < 3) return toastPwa('⚠️ Ingresa tu nombre o empresa', '#ef4444');
+    if (puesto.length < 3) return toastPwa('⚠️ Indica el puesto o servicio', '#ef4444');
+    if (!/^\d{8,15}$/.test(cel)) return toastPwa('⚠️ Celular inválido (mín. 8 dígitos)', '#ef4444');
+
+    $('#pwaAlertaContratacion')
+      .text(`✅ Solicitud enviada: ${nom} (${$('#pwaTotalBob').text()} BOB)`)
+      .fadeIn();
+    logPwa('CONTRATACION', `${nom} — ${puesto}`);
+    toastPwa('🎉 ¡Solicitud enviada con éxito!');
+  });
+
   $('#pwaAbrirModal30s').off('click').on('click', () => {
-    $('#pwaModalServicio').text(HUD_STATE.servicio.nombre);
     $('#pwaModalTotal').text(`${$('#pwaTotalBob').text()} BOB`);
-    clearInterval(HUD_STATE.timer);
-    HUD_STATE.segundos = 30;
+    clearInterval(PWA_STATE.timer);
+    PWA_STATE.segundos = 30;
     $('#pwaTimerVisual').text('00:30s');
-    HUD_STATE.timer = setInterval(() => {
-      HUD_STATE.segundos--;
-      $('#pwaTimerVisual').text(`00:${HUD_STATE.segundos < 10 ? '0' + HUD_STATE.segundos : HUD_STATE.segundos}s`);
-      if (HUD_STATE.segundos <= 0) {
-        clearInterval(HUD_STATE.timer);
+    PWA_STATE.timer = setInterval(() => {
+      PWA_STATE.segundos--;
+      $('#pwaTimerVisual').text(`00:${PWA_STATE.segundos < 10 ? '0' + PWA_STATE.segundos : PWA_STATE.segundos}s`);
+      if (PWA_STATE.segundos <= 0) {
+        clearInterval(PWA_STATE.timer);
         $('#pwaModal30s').fadeOut(150);
-        toastHud('⚠️ Tarifa Flash Expirada');
+        toastPwa('⚠️ Tarifa Flash Expirada', '#ef4444');
       }
     }, 1000);
     $('#pwaModal30s').fadeIn(150).css('display', 'flex');
   });
 
   $('#pwaCancelar30s').off('click').on('click', () => {
-    clearInterval(HUD_STATE.timer);
+    clearInterval(PWA_STATE.timer);
     $('#pwaModal30s').fadeOut(150);
   });
 
   $('#pwaConfirmar30s').off('click').on('click', () => {
-    clearInterval(HUD_STATE.timer);
+    clearInterval(PWA_STATE.timer);
     $('#pwaModal30s').fadeOut(150);
-    toastHud(`✅ Confirmado: ${$('#pwaModalTotal').text()}`);
-    logHud('COTIZACION', $('#pwaModalTotal').text());
+    toastPwa(`✅ Tarifa confirmada: ${$('#pwaModalTotal').text()}`);
+    logPwa('COTIZACION', $('#pwaModalTotal').text());
   });
 
   $('#pwaFormSeguro').off('submit').on('submit', function (e) {
     e.preventDefault();
     const txt = $('#pwaInputSeguro').val().trim();
     if (!txt) return;
-    const $fila = $('<div>').addClass('fila-hud').append(
+    const $fila = $('<div>').addClass('fila-pwa').append(
       $('<span>').addClass('titulo-truncado').text(txt),
-      $('<button>').attr('type', 'button').addClass('btn-tactil-hud btn-quitar-hud').text('✕')
+      $('<button>').attr('type', 'button').addClass('btn-quitar-pwa').text('✕')
     );
     $('#pwaListaSegura').prepend($fila);
     this.reset();
-    logHud('ANTI_XSS', txt);
+    logPwa('ANTI_XSS', txt);
   });
 
   $('#pwaBtnTestXss').off('click').on('click', () => {
@@ -257,12 +306,7 @@ $(document).ready(function () {
     $('#pwaFormSeguro').submit();
   });
 
-  $('#pwaListaSegura').off('click', '.btn-quitar-hud').on('click', '.btn-quitar-hud', function () {
-    $(this).closest('.fila-hud').fadeOut(150, function () { $(this).remove(); });
-  });
-
-  $('#pwaLimpiarLog').off('click').on('click', () => {
-    $('#pwaLogOutput').empty().append($('<div>').text('[Sistema] Bitácora limpia.'));
+  $('#pwaListaSegura').off('click', '.btn-quitar-pwa').on('click', '.btn-quitar-pwa', function () {
+    $(this).closest('.fila-pwa').fadeOut(150, function () { $(this).remove(); });
   });
 });
-

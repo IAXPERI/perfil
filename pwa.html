@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#f97316">
-  <title>Mi Perfil — PWA Game HUD Cero-Scroll</title>
+  <meta name="theme-color" content="#0f172a">
+  <title>Mi Perfil — Vista PWA Cero-Scroll</title>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="pwa.css">
@@ -12,204 +12,213 @@
   <script src="pwa.js" defer></script>
 </head>
 <body>
-  <div class="hud-app">
-    <!-- 1. TOP HUD (Estilo Game Lobby) -->
-    <header class="top-hud">
-      <div class="hud-profile">
-        <div class="hud-avatar">🎮</div>
-        <div class="hud-user-meta">
-          <div class="hud-user-row">
-            <strong id="hudPerfilNombre">Mi Perfil</strong>
-            <span class="hud-lvl">NV. 30</span>
-          </div>
-          <small>Diseño Web II • UPDS 2026</small>
-        </div>
+  <div class="pwa-app">
+    <!-- 1. NAVBAR SUPERIOR (Idéntico a personal/index.html) -->
+    <header class="navbar-pwa">
+      <div class="nav-brand-group">
+        <strong class="brand-title">Mi Perfil</strong>
+        <span id="estadoRed" class="net-badge">🟢 En Línea</span>
       </div>
-
-      <div class="hud-right">
-        <span class="hud-pill hud-gold" title="Puntos / Cotización">🪙 <span id="hudPuntos">2,983</span></span>
-        <span id="estadoRed" class="hud-pill hud-net">🟢 En Línea</span>
-        <a href="index.html" class="btn-pc-back" title="Volver a la Vista PC">💻 Vista PC</a>
-        <button type="button" id="pwaThemeBtn" class="btn-hud-icon" title="Cambiar Tema">🌙</button>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-pc-link">💻 Vista PC</a>
+        <button type="button" id="pwaThemeBtn" class="btn-theme-pwa">🌙 Modo</button>
       </div>
     </header>
 
-    <!-- 2. VIEWPORT CENTRAL CERO-SCROLL -->
-    <main class="hud-viewport">
+    <!-- 2. VIEWPORT CENTRAL CERO-SCROLL (Cada sección cabe en 100dvh sin scroll) -->
+    <main class="pwa-viewport">
 
-      <!-- PESTAÑA 1: INICIO / LOBBY SHOWCASE -->
-      <section id="pane-inicio" class="hud-pane active">
-        <div class="lobby-grid">
-          <div class="lobby-left">
-            <button type="button" class="side-shortcut" data-go="pane-catalogo">
-              <span>🛍️</span>
-              <small>Catálogo</small>
-            </button>
-            <button type="button" class="side-shortcut" data-go="pane-cotizar">
-              <span>⚡</span>
-              <small>Cotizar</small>
-            </button>
-            <button type="button" class="side-shortcut" data-go="pane-seguridad">
-              <span>🛡️</span>
-              <small>Anti-XSS</small>
-            </button>
+      <!-- SECCIÓN 1: INICIO / SOBRE MÍ / FRASE (Igual a index.html) -->
+      <section id="pane-inicio" class="pwa-pane active">
+        <div class="mini-carousel-card">
+          <img id="pwaCarouselImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMPj_L1mVYVkKip49tSHwVi4DBIsQZjWgfcrEpr_aHnA&s=10" alt="Mi Mundo" loading="lazy">
+          <div class="mini-carousel-overlay">
+            <button type="button" id="btnPrevFoto" class="btn-carr-nav">‹</button>
+            <span id="pwaCarouselTitle">Mi Mundo</span>
+            <button type="button" id="btnNextFoto" class="btn-carr-nav">›</button>
           </div>
+        </div>
 
-          <div class="lobby-center-card">
-            <span class="badge-season">MI PERFIL • CERO-SCROLL</span>
-            <h2>"El éxito es la suma de pequeños esfuerzos repetidos día tras día."</h2>
-            <div class="about-compact">
-              <div><strong>🎮 Pasatiempos:</strong> Videojuegos, Series/Anime, Música, Redes.</div>
-              <div><strong>💻 Intereses:</strong> HTML, CSS, JavaScript, Hábitos, Deporte.</div>
-            </div>
-            <div class="lobby-stats-row">
-              <div class="stat-box"><small>Juegos</small><strong>9</strong></div>
-              <div class="stat-box"><small>Música</small><strong>22</strong></div>
-              <div class="stat-box"><small>Proyectos</small><strong>4</strong></div>
-            </div>
-            <div class="lobby-actions-row">
-              <button type="button" id="btnIrCatalogo" class="btn-hud-primary" style="flex:1;">🚀 Catálogo (35)</button>
-              <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQv_Za2WpkiAMMA-pn5YumT0LbBhuPd7JCl9rtfQpuyn095lwY_bxq2asX9krhcntFvoDAKFX39E_Mh/pubhtml" target="_blank" class="btn-hud-secondary" style="text-decoration:none; display:inline-flex; align-items:center;">📅 Horario</a>
-            </div>
-            <div class="social-mini-row">
-              <a href="https://instagram.com" target="_blank">IG</a>
-              <a href="https://tiktok.com" target="_blank">TK</a>
-              <a href="https://www.facebook.com/daniel.aliaga.3766" target="_blank">FB</a>
-            </div>
-          </div>
+        <div class="grid-2-pwa">
+          <article class="card-pwa">
+            <span class="badge-tipo no-prod">NO PRODUCTIVO</span>
+            <h4>Pasatiempos</h4>
+            <ul>
+              <li>Videojuegos con amigos.</li>
+              <li>Series, anime y sci-fi.</li>
+              <li>Escuchar música y playlists.</li>
+            </ul>
+          </article>
+          <article class="card-pwa">
+            <span class="badge-tipo prod">PRODUCTIVO</span>
+            <h4>Intereses</h4>
+            <ul>
+              <li>HTML, CSS, JS y Diseño Web.</li>
+              <li>Hábitos de estudio.</li>
+              <li>Deporte y habilidades técnicas.</li>
+            </ul>
+          </article>
+        </div>
 
-          <div class="lobby-right">
-            <div class="mini-panel" id="contenedorMenu" data-hidratado="false">
-              <h4>⚡ Hidratación PWA</h4>
-              <p>Service Worker activo para uso sin internet.</p>
-              <button type="button" id="btnPWA" class="btn-hud-secondary">Hidratar SW</button>
-            </div>
-            <div class="mini-panel">
-              <h4>🎯 Acceso Rápido</h4>
-              <p>Doble clic en cualquier tarjeta del catálogo para marcar favorito.</p>
-            </div>
+        <div class="frase-pwa-bar">
+          <em>"El éxito es la suma de pequeños esfuerzos repetidos día tras día."</em>
+          <div class="redes-mini">
+            <a href="https://instagram.com" target="_blank">IG</a>
+            <a href="https://tiktok.com" target="_blank">TK</a>
+            <a href="https://www.facebook.com/daniel.aliaga.3766" target="_blank">FB</a>
           </div>
         </div>
       </section>
 
-      <!-- PESTAÑA 2: CATÁLOGO ASÍNCRONO (SINCRONIZADO CON INDEX.HTML) + CASCADA -->
-      <section id="pane-catalogo" class="hud-pane">
-        <div class="pane-header">
-          <h3>📦 Catálogo Personal (Juegos, Música y Proyectos)</h3>
-          <input type="text" id="pwaBuscar" class="hud-input" placeholder="🔍 Buscar Tekken 8, The Strokes, BancoBNB...">
-          <div class="hud-filter-row" id="pwaFilterBar">
-            <button type="button" class="hud-filter-btn active" data-cat="todos">🌐 Todos</button>
-            <button type="button" class="hud-filter-btn" data-cat="juego">🎮 Juegos</button>
-            <button type="button" class="hud-filter-btn" data-cat="musica">🎵 Música</button>
-            <button type="button" class="hud-filter-btn" data-cat="proyecto">💻 Proyectos</button>
+      <!-- SECCIÓN 2: HORARIO (Google Sheets embebido sin scroll de página) -->
+      <section id="pane-horario" class="pwa-pane">
+        <div class="sec-head">
+          <h3>Horario</h3>
+          <small>Mi rutina diaria organizada en Google Sheets.</small>
+        </div>
+        <div class="sheets-wrap">
+          <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQv_Za2WpkiAMMA-pn5YumT0LbBhuPd7JCl9rtfQpuyn095lwY_bxq2asX9krhcntFvoDAKFX39E_Mh/pubhtml?widget=true&amp;headers=false" frameborder="0"></iframe>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: JUEGOS & MÚSICA (Paginado 2x2 sin scroll) -->
+      <section id="pane-catalogo" class="pwa-pane">
+        <div class="sec-head-row">
+          <h3>Juegos &amp; Música</h3>
+          <div class="filter-pills" id="pwaFilterBar">
+            <button type="button" class="pill-btn active" data-cat="todos">Todos</button>
+            <button type="button" class="pill-btn" data-cat="juego">🎮 Juegos (9)</button>
+            <button type="button" class="pill-btn" data-cat="musica">🎵 Música (22)</button>
           </div>
         </div>
 
-        <div class="cascada-bar">
-          <select id="pwaCascadaArea" class="hud-select">
-            <option value="">1. Área</option>
-            <option value="web">Desarrollo Web</option>
+        <div class="search-cascada-row">
+          <input type="text" id="pwaBuscar" class="input-pwa" placeholder="🔍 Buscar Tekken 8, The Strokes...">
+          <select id="pwaCascadaArea" class="input-pwa">
+            <option value="">Área (Cascada)</option>
             <option value="gaming">Gaming</option>
             <option value="musica">Música</option>
           </select>
-          <select id="pwaCascadaSub" class="hud-select" disabled>
-            <option value="">2. Especialidad</option>
+          <select id="pwaCascadaSub" class="input-pwa" disabled>
+            <option value="">Especialidad</option>
           </select>
-          <span id="pwaCascadaRes" class="cascada-badge" style="display:none;"></span>
         </div>
+        <div id="pwaCascadaRes" class="cascada-ok" style="display:none;"></div>
 
-        <div id="pwaCatalogGrid" class="catalog-cards-grid"></div>
+        <div id="pwaCatalogGrid" class="grid-2x2-pwa"></div>
 
-        <div class="paginacion-hud">
-          <button type="button" id="btnPrevPag" class="btn-tactil-hud">◀</button>
-          <span id="infoPag" class="pag-info">1 / 1</span>
-          <button type="button" id="btnNextPag" class="btn-tactil-hud">▶</button>
-        </div>
-      </section>
-
-      <!-- PESTAÑA 3: COTIZADOR FLASH 30s -->
-      <section id="pane-cotizar" class="hud-pane">
-        <div class="center-panel">
-          <h3>💰 Cotizador Flash (30 Segundos)</h3>
-          <p class="muted-txt">Servicio seleccionado: <strong id="pwaServicioNombre">BancoBNB — Proyecto Web</strong> (<span id="pwaServicioPrecio">180</span> BOB/hr)</p>
-          <div class="qty-row">
-            <button type="button" id="pwaRestarHr" class="btn-tactil-hud">-</button>
-            <span id="pwaHorasDisplay" class="qty-val">1</span>
-            <button type="button" id="pwaSumarHr" class="btn-tactil-hud">+</button>
-          </div>
-          <div class="total-hud">Total: <span id="pwaTotalBob">180</span> BOB</div>
-          <button type="button" id="pwaAbrirModal30s" class="btn-hud-primary">⏱️ Bloquear Tarifa 30s</button>
+        <div class="pag-bar">
+          <button type="button" id="btnPrevPag" class="btn-pag">◀ Anterior</button>
+          <span id="infoPag" class="pag-txt">1 / 1</span>
+          <button type="button" id="btnNextPag" class="btn-pag">Siguiente ▶</button>
         </div>
       </section>
 
-      <!-- PESTAÑA 4: LISTA TÁCTIL ANTI-XSS -->
-      <section id="pane-seguridad" class="hud-pane">
-        <div class="center-panel">
-          <h3>🛡️ Cola Táctil Segura (Anti-XSS)</h3>
-          <form id="pwaFormSeguro" class="xss-form-row">
-            <input type="text" id="pwaInputSeguro" class="hud-input" placeholder="Escribe tarea, canción o <script>..." required>
-            <button type="submit" class="btn-tactil-hud btn-accent">+</button>
-            <button type="button" id="pwaBtnTestXss" class="btn-tactil-hud btn-danger">XSS</button>
-          </form>
-          <div id="pwaListaSegura" class="lista-segura-scroll">
-            <div class="fila-hud">
-              <span class="titulo-truncado">Tekken 8 &amp; Proyecto BancoBNB — Sincronizado</span>
-              <button type="button" class="btn-tactil-hud btn-quitar-hud">✕</button>
+      <!-- SECCIÓN 4: MIS PROYECTOS DE SOFTWARE (Idéntico a index.html, 2x2 sin scroll) -->
+      <section id="pane-proyectos" class="pwa-pane">
+        <div class="sec-head">
+          <h3>Mis Proyectos de Software</h3>
+          <small>Proyectos desarrollados en C# con ASP.NET y SQL Server Express</small>
+        </div>
+        <div class="grid-2x2-pwa">
+          <article class="card-pwa proj-card">
+            <span class="badge-blue">FinTech • Banca y Finanzas</span>
+            <h4>BancoBNB</h4>
+            <small class="stack-txt">Stack: C# • ASP.NET • SQL Server Express</small>
+            <p>Sistema bancario transaccional de cuentas, transferencias, depósitos y auditoría.</p>
+          </article>
+          <article class="card-pwa proj-card">
+            <span class="badge-blue">Salud • Gestión Hospitalaria</span>
+            <h4>GestionMedica</h4>
+            <small class="stack-txt">Stack: C# • ASP.NET • SQL Server Express</small>
+            <p>Plataforma clínica para citas médicas, pacientes, historial digital y consultorios.</p>
+          </article>
+          <article class="card-pwa proj-card">
+            <span class="badge-blue">Educación • Gestión Académica</span>
+            <h4>InscripcionesUniversidad</h4>
+            <small class="stack-txt">Stack: C# • ASP.NET • SQL Server Express</small>
+            <p>Matrícula universitaria, oferta de asignaturas, control de cupos y calificaciones.</p>
+          </article>
+          <article class="card-pwa proj-card">
+            <span class="badge-blue">RRHH • Bolsa de Empleo</span>
+            <h4>ProyectoBusquedaTrabajo</h4>
+            <small class="stack-txt">Stack: C# • ASP.NET • SQL Server Express</small>
+            <p>Portal de reclutamiento laboral con ofertas por categoría y postulación con CV.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 5: CONTRATACIÓN, COTIZADOR 30s, ANTI-XSS & BITÁCORA -->
+      <section id="pane-contratar" class="pwa-pane">
+        <div class="grid-2-pwa" style="flex:1; min-height:0;">
+          <div class="card-pwa" style="display:flex; flex-direction:column; gap:6px; justify-content:space-between;">
+            <h4>Formulario de Contratación</h4>
+            <input type="text" id="pwaNombreCont" class="input-pwa" placeholder="Nombre o Empresa Contratante">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <input type="text" id="pwaCarreraCont" class="input-pwa" placeholder="Puesto / Servicio">
+              <input type="text" id="pwaCelCont" class="input-pwa" placeholder="Celular (8+ dígitos)">
             </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:6px;">
+              <span style="font-size:12px;">Horas (50 BOB/hr):</span>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <button type="button" id="pwaRestarHr" class="btn-pag" style="min-width:44px;">-</button>
+                <strong id="pwaHorasDisplay">1</strong>
+                <button type="button" id="pwaSumarHr" class="btn-pag" style="min-width:44px;">+</button>
+              </div>
+              <strong style="color:#f97316;"><span id="pwaTotalBob">50</span> BOB</strong>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <button type="button" id="pwaEnviarContratacion" class="btn-blue-pwa" style="flex:1;">Enviar Solicitud</button>
+              <button type="button" id="pwaAbrirModal30s" class="btn-orange-pwa">⏱️ 30s</button>
+            </div>
+            <div id="pwaAlertaContratacion" style="display:none; font-size:11px; color:#15803d; font-weight:700;"></div>
           </div>
-        </div>
-      </section>
 
-      <!-- PESTAÑA 5: BITÁCORA EN VIVO -->
-      <section id="pane-bitacora" class="hud-pane">
-        <div class="center-panel">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
-            <h3>📡 Bitácora de Eventos JS</h3>
-            <button type="button" id="pwaLimpiarLog" class="btn-tactil-hud" style="padding:0 12px;">Limpiar</button>
-          </div>
-          <div id="pwaLogOutput" class="log-hud">
-            <div>[Sistema] PWA Game HUD lista.</div>
+          <div class="card-pwa" style="display:flex; flex-direction:column; gap:6px; min-height:0;">
+            <h4>🛡️ Lista Anti-XSS &amp; 📡 Bitácora</h4>
+            <form id="pwaFormSeguro" style="display:flex; gap:6px;">
+              <input type="text" id="pwaInputSeguro" class="input-pwa" placeholder="Agregar o probar <script>..." style="flex:1; min-width:0;" required>
+              <button type="submit" class="btn-blue-pwa">+</button>
+              <button type="button" id="pwaBtnTestXss" class="btn-red-pwa">XSS</button>
+            </form>
+            <div id="pwaListaSegura" class="lista-compacta">
+              <div class="fila-pwa">
+                <span class="titulo-truncado">Maquetación PWA Offline-First (UPDS)</span>
+                <button type="button" class="btn-quitar-pwa">✕</button>
+              </div>
+            </div>
+            <div id="pwaLogOutput" class="log-pwa">
+              <div>[Sistema] Vista PWA sincronizada con index.html.</div>
+            </div>
           </div>
         </div>
       </section>
 
     </main>
 
-    <!-- 3. BOTTOM HUD (Barra Inferior Estilo Juego >= 44px) -->
-    <nav class="bottom-hud">
-      <button type="button" class="hud-tab active" data-target="pane-inicio">
-        <span>🏠</span><small>Inicio</small>
-      </button>
-      <button type="button" class="hud-tab" data-target="pane-catalogo">
-        <span>📦</span><small>Catálogo</small>
-      </button>
-      <button type="button" class="hud-tab" data-target="pane-cotizar">
-        <span>💰</span><small>Cotizar</small>
-      </button>
-      <button type="button" class="hud-tab" data-target="pane-seguridad">
-        <span>🛡️</span><small>Anti-XSS</small>
-      </button>
-      <button type="button" class="hud-tab hud-tab-cta" data-target="pane-bitacora">
-        <span>📡</span><small>Bitácora</small>
-      </button>
+    <!-- 3. BARRA INFERIOR DE NAVEGACIÓN POR SECCIONES (>= 44px) -->
+    <nav class="bottom-nav-pwa">
+      <button type="button" class="nav-tab active" data-target="pane-inicio"><span>🏠</span><small>Sobre Mí</small></button>
+      <button type="button" class="nav-tab" data-target="pane-horario"><span>📅</span><small>Horario</small></button>
+      <button type="button" class="nav-tab" data-target="pane-catalogo"><span>🎮</span><small>Juegos/Música</small></button>
+      <button type="button" class="nav-tab" data-target="pane-proyectos"><span>💻</span><small>Proyectos</small></button>
+      <button type="button" class="nav-tab" data-target="pane-contratar"><span>✉️</span><small>Contratar</small></button>
     </nav>
   </div>
 
-  <!-- MODAL 30 SEGUNDOS -->
-  <div id="pwaModal30s" class="hud-modal-overlay">
-    <div class="hud-modal-box">
-      <h3>⏱️ Tarifa Flash</h3>
-      <div id="pwaTimerVisual" class="hud-timer">00:30s</div>
-      <p><strong id="pwaModalServicio">PWA Offline-First HUD</strong></p>
-      <p>Total: <strong id="pwaModalTotal" style="color:#f97316;">180 BOB</strong></p>
+  <!-- Modal 30s -->
+  <div id="pwaModal30s" class="modal-pwa-overlay">
+    <div class="modal-pwa-box">
+      <h3>⏱️ Tarifa Flash Bloqueada</h3>
+      <div id="pwaTimerVisual" class="timer-pwa">00:30s</div>
+      <p>Total: <strong id="pwaModalTotal" style="color:#0d6efd;">50 BOB</strong></p>
       <div style="display:flex; gap:8px; margin-top:12px;">
-        <button type="button" id="pwaConfirmar30s" class="btn-hud-primary" style="flex:1;">✅ Confirmar</button>
-        <button type="button" id="pwaCancelar30s" class="btn-hud-secondary" style="flex:1;">Cancelar</button>
+        <button type="button" id="pwaConfirmar30s" class="btn-blue-pwa" style="flex:1;">✅ Confirmar</button>
+        <button type="button" id="pwaCancelar30s" class="btn-pag" style="flex:1;">Cancelar</button>
       </div>
     </div>
   </div>
 
-  <div id="pwaToast" class="hud-toast"></div>
+  <div id="pwaToast" class="toast-pwa"></div>
 </body>
 </html>
-
