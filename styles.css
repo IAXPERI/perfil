@@ -1195,13 +1195,18 @@ body.alto-contraste .tarjeta-item {
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
-        gap: 12px;
-        width: 145px;
-        min-height: calc(100dvh - 104px);
+        gap: 8px;
+        width: 156px;
+        height: fit-content;
+        min-height: auto;
+        margin: 16px 0 16px 16px;
+        padding: 12px;
         position: sticky;
         top: 12px;
-        border-top: none;
-        border-right: 2px solid #f97316;
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
+        background: var(--card-bg);
+        box-shadow: var(--shadow-md);
     }
 }
 
