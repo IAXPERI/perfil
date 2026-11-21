@@ -1,14 +1,15 @@
-const CACHE_NAME = 'personal-pwa-hud-v5';
+const CACHE_NAME = 'personal-unificado-v6';
 const ASSETS_TO_CACHE = [
   './',
-  'pwa.html',
-  'pwa.css',
-  'pwa.js',
-  'manifest.json',
-  'data/personal.json',
-  'icons/icon-192.png',
-  'icons/icon-512.png',
-  'https://code.jquery.com/jquery-3.7.1.min.js'
+  './index.html',
+  './styles.css',
+  './script.js',
+  './manifest.json',
+  './data/personal.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  'https://code.jquery.com/jquery-3.7.1.min.js',
+  'https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'
 ];
 
 self.addEventListener('install', event => {
@@ -28,8 +29,8 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET' || event.request.url.includes('supabase.co')) return;
   event.respondWith(
     caches.match(event.request).then(cached => cached || fetch(event.request))
   );
 });
-

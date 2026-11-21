@@ -1,12 +1,12 @@
 {
-  "name": "Mi Perfil Personal - PWA Cero-Scroll",
-  "short_name": "MiPerfilPWA",
-  "description": "Aplicación Progresiva Personal Cero-Scroll (Diseño Web II - UPDS 2026)",
-  "start_url": "pwa.html",
+  "name": "Mi Perfil Personal — Aplicación Web Adaptable & PWA",
+  "short_name": "MiPerfil",
+  "description": "Portafolio Personal con Flexbox Responsivo, A11Y, BEM, DOMPurify y PWA Offline-First (Diseño Web II - UPDS 2026)",
+  "start_url": "./index.html",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#f8fafc",
-  "theme_color": "#0b2545",
+  "background_color": "#090d1e",
+  "theme_color": "#0f294a",
   "icons": [
     {
       "src": "icons/icon-192.png",
@@ -22,4 +22,3 @@
     }
   ]
 }
-

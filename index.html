@@ -3,12 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mi Página Personal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f294a">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>Mi Página Personal — Aplicación Web Adaptable &amp; PWA</title>
     <!-- Bootstrap CSS (Para el Carrusel y estructura base) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery 3.7.1 Oficial -->
+    <!-- jQuery 3.7.1 Oficial y DOMPurify 3.1.6 -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
     <!-- Nuestro archivo de estilos CSS propio -->
     <link rel="stylesheet" href="styles.css">
     <!-- Nuestro script de manipulación del DOM y Semanas 1-3 -->
@@ -18,26 +22,37 @@
 <body>
 
     <!-- ==========================================
-         1. NAVBAR CON MENÚ HAMBURGUESA DOM (Función 3) Y MODO OSCURO (Función 1)
+         1. NAVBAR CON MENÚ HAMBURGUESA DOM, BOTÓN INSTALAR PWA Y A11Y
          ========================================== -->
-    <header class="navbar-dom sticky-top">
+    <header class="barra-superior navbar-dom sticky-top">
         <div class="container nav-top-bar">
             <a class="navbar-brand fw-bold text-white text-decoration-none fs-4" href="#">Mi Perfil</a>
 
             <div class="acciones-header">
-                <!-- Enlace a la PWA Móvil Cero-Scroll aparte -->
-                <a href="pwa.html" class="btn-pwa-link">📱 Vista Teléfono (PWA)</a>
+                <span id="estadoRedPersonal" class="btn-toggle" style="background:#dcfce7; color:#15803d;">🟢 En Línea</span>
+
+                <!-- Botón PWA: visible solo cuando el navegador permite instalar y aún no está instalada -->
+                <button type="button" id="btnInstalarPWA" class="btn-toggle" hidden>📲 Instalar App</button>
+
+                <!-- Botones de Simulación Semana 3 -->
+                <button type="button" id="btnSimularContraste" class="btn-toggle" title="Simular Alto Contraste">👁️ Contraste</button>
+                <button type="button" id="btnSimularVista" class="btn-toggle" title="Simular Vista Móvil / Escritorio">📱 Móvil/PC</button>
+                <button type="button" id="btnAuditarA11Y" class="btn-toggle" title="Verificar Semántica HTML5">🔍 Semántica</button>
 
                 <!-- FUNCIÓN 1: Botón Modo Oscuro / Claro -->
                 <button id="themeBtn" class="btn-toggle" type="button">🌙 Cambiar Modo</button>
 
                 <!-- FUNCIÓN 3: Botón Menú Hamburguesa controlado por el DOM -->
-                <button id="burguerBtn" class="btn-burguer" type="button">☰ Menú Navegación</button>
+                <button id="burguerBtn" class="btn-burguer" type="button" aria-label="Abrir menú de navegación">☰ Menú Navegación</button>
             </div>
         </div>
 
+        <div class="container">
+            <p id="reporteA11Y" role="status" aria-live="polite" class="reporte-a11y">Estado: Listo para auditar.</p>
+        </div>
+
         <!-- Menú desplegable controlado con classList.toggle('show') -->
-        <nav id="navMenu" class="nav-menu container">
+        <nav id="navMenu" class="nav-menu container" aria-label="Navegación superior">
             <a href="#carrusel">Inicio</a>
             <a href="#pasatiempos">Pasatiempos e Intereses</a>
             <a href="#horario">Horario (Sheets)</a>
@@ -105,9 +120,10 @@
     </section>
 
     <!-- ==========================================
-         3. CUERPO PRINCIPAL DE LA PÁGINA
+         3. CONTENEDOR FLEXBOX RESPONSIVO (.contenedor-app)
          ========================================== -->
-    <main class="contenedor-principal">
+    <main class="contenedor-app">
+        <section class="area-contenido contenedor-principal">
 
         <!-- A) PASATIEMPOS (NO PRODUCTIVO) E INTERESES (PRODUCTIVO) -->
         <section id="pasatiempos" class="seccion-bloque">
@@ -942,7 +958,7 @@
                         <div class="fecha-grupo">
                             <input type="number" id="dia" placeholder="Día (1-31)" min="1" max="31">
                             <input type="number" id="mes" placeholder="Mes (1-12)" min="1" max="12">
-                            <input type="number" id="anio" placeholder="Año (Ej. 2026)" min="1950" max="2030">
+                            <input type="number" id="anio" placeholder="Año (Ej. 2026)" min="2026" max="2027">
                         </div>
                         <div id="msgFecha" class="campo-msg oculto"></div>
                     </div>
@@ -976,7 +992,7 @@
 
                     <!-- 5. Sector País y Número de Celular (195 Países) -->
                     <div class="campo-form">
-                        <label for="celular">País y Número de Celular de Contacto (mínimo 8 dígitos):</label>
+                        <label for="celular">País y Número de Celular de Contacto (exactamente 8 dígitos):</label>
                         <div class="telefono-grupo">
                             <select id="codigoPais">
                                 <option value="">-- Selecciona el País (195 Países) --</option>
@@ -1176,8 +1192,8 @@
                                 <option value="+260">Zambia (+260)</option>
                                 <option value="+263">Zimbabue (+263)</option>
                             </select>
-                            <input type="tel" id="celular" placeholder="Número de celular (mínimo 8 dígitos)"
-                                maxlength="15">
+                            <input type="tel" id="celular" placeholder="Número de celular (8 dígitos)"
+                                maxlength="8">
                         </div>
 
                         <div id="msgCelular" class="campo-msg oculto"></div>
@@ -1188,9 +1204,32 @@
 
                 <!-- Contenedor donde el DOM inyecta el resumen final al enviar -->
                 <div id="alertaBox"></div>
+                <div id="detalleProyecto" class="detalle-dompurify"></div>
+
+                <!-- Historial de Contrataciones Guardadas en Supabase -->
+                <div style="margin-top:18px; padding-top:14px; border-top:1px solid var(--card-border);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+                        <h4 style="margin:0; font-size:1rem;">🗄️ Solicitudes de Contratación en Supabase (<span id="countContratacionesSupa">0</span>)</h4>
+                        <button type="button" id="btnRefrescarContratacionesSupa" class="btn-toggle" style="min-height:44px;">🔄 Actualizar BD</button>
+                    </div>
+                    <div id="listaContratacionesSupabase" class="lista-tactil-box">
+                        <div class="fila-tactil"><span class="titulo-truncado">Cargando solicitudes desde Supabase...</span></div>
+                    </div>
+                </div>
             </div>
         </section>
 
+        </section>
+
+        <!-- BARRA DOCK FLEXBOX (Abajo en Celular Vertical / Lateral Izquierda en Horizontal o PC) -->
+        <nav class="dock-acciones" aria-label="Menú principal">
+            <button type="button" class="dock-btn" data-scroll="#pasatiempos">👤 Sobre Mí</button>
+            <button type="button" class="dock-btn" data-scroll="#horario">📅 Horario</button>
+            <button type="button" class="dock-btn" data-scroll="#juegos">🎮 Juegos</button>
+            <button type="button" class="dock-btn" data-scroll="#musica">🎵 Música</button>
+            <button type="button" class="dock-btn" data-scroll="#proyectos">💻 Proyectos</button>
+            <button type="button" class="dock-btn" data-scroll="#contratacion">✉️ Contratar</button>
+        </nav>
     </main>
 
     <!-- ==========================================

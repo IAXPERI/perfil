@@ -221,8 +221,9 @@ function validarFecha(mostrarVacio = intentoEnviar) {
 
     if (aTexto !== "") {
         const anio = Number(aTexto);
-        if (!Number.isInteger(anio) || anio < 1950 || anio > 2030) {
-            actualizarEstado(msgFecha, [anioInput], false, "⚠️ El Año debe ser un número entre 1950 y 2030.");
+        const anioActual = new Date().getFullYear();
+        if (!Number.isInteger(anio) || anio < anioActual || anio > anioActual + 1) {
+            actualizarEstado(msgFecha, [anioInput], false, `⚠️ El Año debe ser ${anioActual} o ${anioActual + 1} (no años pasados como 1950).`);
             return false;
         } else {
             anioInput.classList.remove('input-error');
@@ -257,7 +258,18 @@ function validarFecha(mostrarVacio = intentoEnviar) {
         return false;
     }
 
-    actualizarEstado(msgFecha, [diaInput, mesInput, anioInput], true, `✅ Fecha de contratación válida (${dia}/${mes}/${anio}).`);
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    const maxFecha = new Date(hoy);
+    maxFecha.setMonth(maxFecha.getMonth() + 1);
+    const fechaIngresada = new Date(anio, mes - 1, dia);
+
+    if (fechaIngresada < hoy || fechaIngresada > maxFecha) {
+        actualizarEstado(msgFecha, [diaInput, mesInput, anioInput], false, `⚠️ La fecha debe estar entre hoy (${hoy.toLocaleDateString()}) y máximo 1 mes (${maxFecha.toLocaleDateString()}).`);
+        return false;
+    }
+
+    actualizarEstado(msgFecha, [diaInput, mesInput, anioInput], true, `✅ Fecha de inicio válida (${dia}/${mes}/${anio}).`);
     return true;
 }
 
@@ -331,7 +343,7 @@ function validarCelular(mostrarVacio = intentoEnviar) {
 
     if (valor === "") {
         if (mostrarVacio) {
-            actualizarEstado(msgCelular, [celularInput], false, "⚠️ Falta ingresar el número de celular (mínimo 8 dígitos).");
+            actualizarEstado(msgCelular, [celularInput], false, "⚠️ Falta ingresar el número de celular (8 dígitos).");
         } else {
             limpiarEstado(msgCelular, [celularInput]);
         }
@@ -343,13 +355,8 @@ function validarCelular(mostrarVacio = intentoEnviar) {
         return false;
     }
 
-    if (valor.length < 8) {
-        actualizarEstado(msgCelular, [celularInput], false, `⚠️ El celular debe tener al menos 8 dígitos (llevas ${valor.length} de mínimo 8).`);
-        return false;
-    }
-
-    if (valor.length > 15) {
-        actualizarEstado(msgCelular, [celularInput], false, "⚠️ El número no debe exceder los 15 dígitos internacionales.");
+    if (valor.length !== 8) {
+        actualizarEstado(msgCelular, [celularInput], false, `⚠️ El celular debe tener exactamente 8 dígitos (llevas ${valor.length} de 8).`);
         return false;
     }
 
@@ -402,6 +409,24 @@ form.addEventListener('submit', (e) => {
         if (typeof logPersonal === 'function') {
             logPersonal('FORM_SUBMIT', `Contratación enviada para ${nombreInput.value.trim()}`);
         }
+        fetch(`${SUPABASE_URL}/rest/v1/contrataciones_personal`, {
+            method: 'POST',
+            headers: SUPABASE_HEADERS,
+            body: JSON.stringify({
+                contratante: nombreInput.value.trim(),
+                fecha_inicio: `${diaInput.value}/${mesInput.value}/${anioInput.value}`,
+                puesto: carreraInput.value.trim(),
+                modalidad: semestreInput.value,
+                celular: `${paisSeleccionado} ${celularInput.value.trim()}`
+            })
+        })
+            .then(r => r.ok ? r.json() : Promise.reject())
+            .then(() => {
+                logPersonal('SUPABASE_INSERT', `Contratación guardada en public.contrataciones_personal`);
+                renderizarDetalleSeguro(`<strong>Guardado en Supabase:</strong> Solicitud de ${nombreInput.value.trim()} registrada en Postgres.`);
+                cargarContratacionesSupabase();
+            })
+            .catch(() => {});
     } else {
         const box = document.createElement('div');
         box.className = 'campo-msg msg-error';
@@ -413,8 +438,68 @@ form.addEventListener('submit', (e) => {
 });
 
 // ==============================================================================
-// MÓDULO UNIFICADO SEMANAS 1-3 (JQUERY + .off().on() + ANTI-XSS + MODAL 30s)
+// MÓDULO UNIFICADO SEMANAS 1-3 (SUPABASE, PWA, FLEXBOX, A11Y, DOMPURIFY, ANTI-XSS)
 // ==============================================================================
+const SUPABASE_URL = 'https://urvevemsosutoaexikpw.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVydmV2ZW1zb3N1dG9hZXhpa3B3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUyMjY3OTEsImV4cCI6MjExMDgwMjc5MX0.SnA1-iZxacnY3ylKUti5sdtA18336vvGUCCgKVQSVsQ';
+const SUPABASE_HEADERS = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
+};
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('[SW PERSONAL] Activo:', reg.scope))
+            .catch(err => console.warn('[SW PERSONAL] Error:', err));
+    });
+}
+
+let eventoInstalacion;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    eventoInstalacion = e;
+    const btn = document.getElementById('btnInstalarPWA');
+    if (btn) btn.hidden = false;
+});
+
+function renderizarDetalleSeguro(htmlDesdeServidor) {
+    if (typeof DOMPurify !== 'undefined') {
+        const limpio = DOMPurify.sanitize(htmlDesdeServidor);
+        $('#detalleProyecto').html(limpio);
+    } else {
+        $('#detalleProyecto').text(htmlDesdeServidor);
+    }
+}
+
+function cargarContratacionesSupabase() {
+    if (typeof window.jQuery === 'undefined') return;
+    fetch(`${SUPABASE_URL}/rest/v1/contrataciones_personal?select=*&order=created_at.desc&limit=8`, { headers: SUPABASE_HEADERS })
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(lista => {
+            const $box = $('#listaContratacionesSupabase').empty();
+            $('#countContratacionesSupa').text(lista.length);
+            if (!lista.length) {
+                $box.append($('<div>').addClass('fila-tactil').append($('<span>').addClass('titulo-truncado').text('Sin solicitudes registradas aún.')));
+                return;
+            }
+            lista.forEach(c => {
+                const txt = `💼 ${c.contratante} — ${c.puesto} (${c.modalidad}) | Inicio: ${c.fecha_inicio} | Tel: ${c.celular}`;
+                const $fila = $('<div>').addClass('fila-tactil').attr('data-id', c.id).append(
+                    $('<span>').addClass('titulo-truncado').text(txt),
+                    $('<button>').attr({ type: 'button', title: 'Editar puesto' }).addClass('btn-tactil btn-edit-cont')
+                        .css({ background: '#e0f2fe', color: '#0369a1' }).text('✏️'),
+                    $('<button>').attr({ type: 'button', title: 'Eliminar solicitud' }).addClass('btn-tactil btn-del-cont')
+                        .css({ background: '#fee2e2', color: '#dc2626' }).text('🗑️')
+                );
+                $box.append($fila);
+            });
+        })
+        .catch(() => {});
+}
+
 const PERSONAL_CASCADA = {
     web: [
         { id: 'pwa', label: 'Arquitectura PWA Offline-First', rec: 'Service Worker + Cache Storage + Manifest JSON' },
@@ -447,6 +532,102 @@ function mostrarToastPersonal(msg) {
 
 if (typeof window.jQuery !== 'undefined') {
     $(document).ready(function () {
+        function actualizarRedPersonal() {
+            const $net = $('#estadoRedPersonal');
+            if (navigator.onLine) {
+                $net.text('🟢 En Línea').css({ background: '#dcfce7', color: '#15803d' });
+            } else {
+                $net.text('🟠 Offline').css({ background: '#ffedd5', color: '#c2410c' });
+            }
+        }
+        $(window).off('online offline').on('online offline', actualizarRedPersonal);
+        actualizarRedPersonal();
+        cargarContratacionesSupabase();
+
+        $('#btnRefrescarContratacionesSupa').off('click').on('click', function () {
+            cargarContratacionesSupabase();
+            logPersonal('SUPABASE_REFRESH', 'Solicitudes de contratación actualizadas desde Postgres');
+        });
+
+        // CRUD: Editar (PATCH) y Eliminar (DELETE) contrataciones en Supabase
+        $('#listaContratacionesSupabase').off('click', '.btn-edit-cont').on('click', '.btn-edit-cont', function () {
+            const id = $(this).closest('.fila-tactil').attr('data-id');
+            const nuevoPuesto = prompt('Nuevo puesto o servicio requerido:');
+            if (!nuevoPuesto || nuevoPuesto.trim().length < 2) return;
+            fetch(`${SUPABASE_URL}/rest/v1/contrataciones_personal?id=eq.${id}`, {
+                method: 'PATCH',
+                headers: SUPABASE_HEADERS,
+                body: JSON.stringify({ puesto: nuevoPuesto.trim() })
+            })
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(() => {
+                    cargarContratacionesSupabase();
+                    mostrarToastPersonal('✏️ Solicitud actualizada en Supabase');
+                    logPersonal('SUPABASE_UPDATE', `Solicitud #${id} actualizada`);
+                })
+                .catch(() => mostrarToastPersonal('⚠️ Error al actualizar en Supabase'));
+        });
+
+        $('#listaContratacionesSupabase').off('click', '.btn-del-cont').on('click', '.btn-del-cont', function () {
+            const id = $(this).closest('.fila-tactil').attr('data-id');
+            fetch(`${SUPABASE_URL}/rest/v1/contrataciones_personal?id=eq.${id}`, {
+                method: 'DELETE',
+                headers: SUPABASE_HEADERS
+            })
+                .then(r => r.ok ? r : Promise.reject())
+                .then(() => {
+                    cargarContratacionesSupabase();
+                    mostrarToastPersonal('🗑️ Solicitud eliminada de Supabase');
+                    logPersonal('SUPABASE_DELETE', `Solicitud #${id} eliminada`);
+                })
+                .catch(() => mostrarToastPersonal('⚠️ Error al eliminar en Supabase'));
+        });
+
+        // Sincronización Inicial desde Supabase (public.catalogo_personal)
+        fetch(`${SUPABASE_URL}/rest/v1/catalogo_personal?select=*&order=id.asc`, { headers: SUPABASE_HEADERS })
+            .then(r => r.ok ? r.json() : Promise.reject())
+            .then(data => {
+                logPersonal('SUPABASE_SELECT', `${data.length} ítems sincronizados desde public.catalogo_personal`);
+                renderizarDetalleSeguro(`<strong>Supabase Conectado:</strong> ${data.length} ítems activos en <code>public.catalogo_personal</code>.`);
+            })
+            .catch(() => logPersonal('SUPABASE_OFFLINE', 'Usando datos locales Offline-First'));
+
+        $('#btnInstalarPWA').off('click').on('click', async function () {
+            if (!eventoInstalacion) return;
+            eventoInstalacion.prompt();
+            await eventoInstalacion.userChoice;
+            this.hidden = true;
+            logPersonal('PWA_INSTALL', 'Instalación PWA solicitada');
+        });
+
+        $('#btnSimularContraste').off('click').on('click', function () {
+            document.body.classList.toggle('alto-contraste');
+            logPersonal('A11Y_CONTRASTE', document.body.classList.contains('alto-contraste') ? 'Alto Contraste ON' : 'Alto Contraste OFF');
+        });
+
+        $('#btnSimularVista').off('click').on('click', function () {
+            $('.grid-tarjetas, .modulo-semanas-grid').toggleClass('sim-movil');
+            logPersonal('LAYOUT_SIM', 'Alternada simulación Vista Móvil / Escritorio');
+        });
+
+        $('#btnAuditarA11Y').off('click').on('click', function () {
+            const zonas = document.querySelectorAll('header, nav, main, article, footer').length;
+            const sinAlt = document.querySelectorAll('img:not([alt]), img[alt=""]').length;
+            const rep = document.getElementById('reporteA11Y');
+            if (rep) {
+                rep.textContent = `Auditoría en vivo: ${zonas} etiquetas semánticas HTML5 detectadas | Imágenes sin alt: ${sinAlt}.`;
+            }
+            logPersonal('AUDITORIA_A11Y', `${zonas} etiquetas semánticas | sin alt: ${sinAlt}`);
+        });
+
+        $(document).off('click', '.dock-btn').on('click', '.dock-btn', function () {
+            const destino = $(this).attr('data-scroll');
+            const $el = $(destino);
+            if ($el.length) {
+                $('html, body').animate({ scrollTop: $el.offset().top - 75 }, 350);
+            }
+        });
+
         // 1. Cascada 3 Capas
         $('#pCascadaArea').off('change').on('change', function () {
             const area = $(this).val();
