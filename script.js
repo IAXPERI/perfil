@@ -620,13 +620,41 @@ if (typeof window.jQuery !== 'undefined') {
             logPersonal('AUDITORIA_A11Y', `${zonas} etiquetas semánticas | sin alt: ${sinAlt}`);
         });
 
+        function mostrarVistaPersonal(destino) {
+            $('#carrusel, .seccion-bloque').hide();
+            $('.dock-btn').removeClass('activo');
+
+            if (!destino || destino === '#' || destino === '#carrusel' || destino === '#pasatiempos') {
+                $('#carrusel, #pasatiempos, #frase').fadeIn(200);
+                $('.dock-btn[data-scroll="#pasatiempos"]').addClass('activo');
+            } else if (destino === '#contratacion' || destino === '#moduloSemanas') {
+                $('#moduloSemanas, #contratacion').fadeIn(200);
+                $('.dock-btn[data-scroll="#contratacion"]').addClass('activo');
+            } else if (destino === '#footer') {
+                $('#pasatiempos, #frase').fadeIn(200);
+                $('.dock-btn[data-scroll="#pasatiempos"]').addClass('activo');
+            } else {
+                $(destino).fadeIn(200);
+                $(`.dock-btn[data-scroll="${destino}"]`).addClass('activo');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         $(document).off('click', '.dock-btn').on('click', '.dock-btn', function () {
             const destino = $(this).attr('data-scroll');
-            const $el = $(destino);
-            if ($el.length) {
-                $('html, body').animate({ scrollTop: $el.offset().top - 75 }, 350);
+            mostrarVistaPersonal(destino);
+        });
+
+        $(document).off('click', '#navMenu a, .navbar-brand').on('click', '#navMenu a, .navbar-brand', function (e) {
+            const href = $(this).attr('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                $('#navMenu').removeClass('show');
+                mostrarVistaPersonal(href);
             }
         });
+
+        mostrarVistaPersonal('#pasatiempos');
 
         // 1. Cascada 3 Capas
         $('#pCascadaArea').off('change').on('change', function () {

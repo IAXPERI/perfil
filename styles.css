@@ -1101,8 +1101,11 @@ body.alto-contraste .tarjeta-item {
     cursor: pointer;
 }
 
-.dock-btn:hover {
-    background: #f97316;
+.dock-btn:hover,
+.dock-btn.activo {
+    background: #f97316 !important;
+    color: #ffffff !important;
+    border-color: #ea580c !important;
 }
 
 /* PC o Celular Girado en Horizontal (Landscape): barra de iconos a la izquierda */
